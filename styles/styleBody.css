@@ -31,7 +31,15 @@ footer {
     padding: 2em;
     background: linear-gradient(90deg, #a3eafc, #e2fcf6);
     width: 30em;
+}
 
+#register_form {
+    min-width: 25%;
+    max-width: 30%;
+    border-radius: 2em;
+    margin: 20vh auto;
+    padding: 2em;
+    background: linear-gradient(90deg, #a3eafc, #e2fcf6);
 }
 
 .debug{

@@ -45,7 +45,7 @@
         </nav>
     </header>
     <article>
-        <div id="login_form" class="debug">
+        <div id="login_form">
             <h1>Prihllásenie</h1>
             <div class="container">
                 <div class="row">
@@ -57,18 +57,24 @@
             <div id="login_asStudent">
                 <form>
                     <div class="form-group">
-                        <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Zadaj email" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
+                        <label for="exam_code">Kód testu:</label><small>(*Zadaj: "QWERT" pre test)</small> <?php //TODO: Po spravnom overeni zmazat ?>
+                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" onchange="confirmCode(this)" required>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Heslo" required>
+                    <div id="additional_login" style="display: none;">
+                        <div class="form-group">
+                            <label for="meno">Meno:</label>
+                            <input type="text" class="form-control" id="meno" placeholder="Zadaj meno" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="priezvisko">Priezvisko:</label>
+                            <input type="text" class="form-control" id="priezvisko" placeholder="Zadaj priezvisko" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ais_id">AIS ID:</label>
+                            <input type="number" class="form-control" id="ais_id" placeholder="Zadaj AIS ID" min="1" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Prihlásiť</button>
                     </div>
-                    <div class="form-group">
-                        <label for="exam_code">Kód testu</label>
-                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Prihlásiť</button>
                 </form>
             </div>
             <div id="login_asTeacher" style="display: none;">
@@ -82,6 +88,7 @@
                         <input type="password" class="form-control" id="password" placeholder="Heslo" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Prihlásiť</button>
+                    <a href="register.php"><div class="btn btn-info">Registrácia</div></a>
                 </form>
             </div>
         </div>
@@ -92,9 +99,6 @@
         let loginStudent = document.getElementById("login_asStudent");
         let loginTeacher = document.getElementById("login_asTeacher");
 
-        loginStudent.style.cursor = "pointer";
-        loginTeacher.style.cursor = "pointer";
-
         if(form.id === "loginStudent"){
             loginStudent.style.display = "block";
             loginTeacher.style.display = "none";
@@ -102,6 +106,16 @@
         else{
             loginStudent.style.display = "none";
             loginTeacher.style.display = "block";
+        }
+    }
+
+    function confirmCode(code){
+        let addit_log = document.getElementById("additional_login");
+        if(code.value === "QWERT"){ //TODO: Over pomocou kódu, ktorý je v DB
+            addit_log.style.display = "block";
+        }
+        else {
+            addit_log.style.display = "none";
         }
     }
 
