@@ -1,3 +1,7 @@
+<?php 
+    var_dump( get_include_path());
+?>
+
 <!DOCTYPE html>
 <html lang="sk">
 <head>
@@ -42,7 +46,7 @@
         </nav>
     </header>
     <article>
-        <h1>Tu si daj text jaky ces</h1>
+        <h1>nieco tu bude</h1>
         <a href="index.php"><div class="btn btn-info">Hlavná stránka</div></a>
     </article>
 </div>
