@@ -1,0 +1,10 @@
+config.php - daj do ignoru a neuploadúj na git server.
+- každému bude bežať vlastná sql tabuľka na servery, nech skúša svoje stuffs
+
+Skopíruj do súboru "config.php":
+<?php
+const DB_HOST = "";
+const DB_USER = "";
+const DB_PASS = "";
+const DB_NAME = "";
+?>

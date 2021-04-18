@@ -1,4 +1,25 @@
 <?php
+session_start();
+
+require_once "database/Database.php";
+try {
+    $conn = (new Database())->getConnection();
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+if(isset($_POST['email']) && isset($_POST['password'])){
+    $sql = "SELECT email,password FROM teacher";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_NUM);
+
+    foreach ($rows as $row) {
+        if($row[0] == $_POST['email'] && password_verify($_POST['password'], $row[1])){
+            header("Location: teacherProfil.php");
+        }
+    }
+}
 
 ?>
 
@@ -55,7 +76,7 @@
             </div>
             <br>
             <div id="login_asStudent">
-                <form>
+                <form action="index.php" method="post">
                     <div class="form-group">
                         <label for="exam_code">Kód testu:</label><small>(*Zadaj: "QWERT" pre test)</small> <?php //TODO: Po spravnom overeni zmazat ?>
                         <input type="text" class="form-control" id="exam_code" placeholder="Kód" onchange="confirmCode(this)" required>
@@ -78,14 +99,14 @@
                 </form>
             </div>
             <div id="login_asTeacher" style="display: none;">
-                <form>
+                <form action="index.php" method="post">
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Zadaj email" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Zadaj email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Heslo" required>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Heslo" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Prihlásiť</button>
                     <a href="register.php"><div class="btn btn-info">Registrácia</div></a>

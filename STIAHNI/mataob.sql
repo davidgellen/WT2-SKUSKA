@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: localhost
--- Čas generovania: So 17.Apr 2021, 09:42
+-- Čas generovania: Sun 18.Apr 2021, 05:45
 -- Verzia serveru: 8.0.23-0ubuntu0.20.04.1
 -- Verzia PHP: 8.0.3
 
@@ -57,6 +57,7 @@ CREATE TABLE `teacher` (
   `id` int UNSIGNED NOT NULL,
   `name` varchar(64) NOT NULL,
   `surname` varchar(64) NOT NULL,
+  `email` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
