@@ -1,12 +1,12 @@
 <?php
-
+require_once( "/home/xmedzihradska/public_html/skuska/config/config.php");
 
 class Database{
 
     private $conn;
 
     public function getConnection(){
-        require_once "../config/config.php";
+        
         $this->conn = null;
         try{
             $this->conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASS);
