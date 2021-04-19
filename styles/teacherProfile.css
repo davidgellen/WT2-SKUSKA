@@ -1,0 +1,48 @@
+#profile, #content{
+    height: 100%;
+    padding: 3em;
+}
+
+hr.style-eight {
+    overflow: visible; /* For IE */
+    border-top: medium double #0e373e;
+    color: #0e373e;
+    text-align: center;
+}
+
+#profile_info{
+    height: 10%;
+}
+
+#profile_menu{
+    height: 90%;
+}
+
+.menu_opt{
+    background: rgb(29,203,253);
+    background: linear-gradient(133deg, rgba(29,203,253,1) 50%, rgba(252,176,69,1) 100%);
+    cursor: pointer;
+    padding: 0.5em 0;
+    margin: 0.5em 2em;
+    border-radius: 0.5em;
+    border: 3px solid #16caca;
+    transition: 0.1s;
+}
+
+.menu_opt:hover{
+    color: white;
+    background: rgba(24,172,214,1);
+    border: 3px solid #11a0a0;
+}
+
+#profile{ /*Spolocne zadefinovany je aj s 'content'*/
+    text-align: center;
+}
+
+#content{ /*Spolocne zadefinovany je aj s 'profile'*/
+
+}
+
+.debug{ /*TODO: Potom zmazať*/
+    border: 3px dotted black;
+}
