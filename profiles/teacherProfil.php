@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "database/Database.php";
+require_once "../database/Database.php";
 try {
     $conn = (new Database())->getConnection();
 } catch(PDOException $e) {
@@ -10,7 +10,7 @@ try {
 
 if(isset($_POST['logout'])){
     session_destroy();
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 
 if(isset($_SESSION['logged_as'])){
@@ -19,7 +19,7 @@ if(isset($_SESSION['logged_as'])){
     }
 }else{
     session_destroy();
-    header("Location: index.php");
+    header("Location: ../index.php");
 }
 
 
@@ -28,15 +28,15 @@ if(isset($_SESSION['logged_as'])){
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <?php include "includes/header.php" ?>
-    <link rel="stylesheet" href="styles/styleBody.css">
-    <link rel="stylesheet" href="styles/teacherProfile.css">
+    <?php include "../includes/header.php" ?>
+    <link rel="stylesheet" href="../styles/styleBody.css">
+    <link rel="stylesheet" href="../styles/teacherProfile.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
 <div class="wrapper flex-grow-1 center-content" id="betterWidth">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.php">BohovskaOhromnaAplikacia</a>
+            <a class="navbar-brand" href="../index.php">BohovskaOhromnaAplikacia</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -44,7 +44,7 @@ if(isset($_SESSION['logged_as'])){
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.php">Administratíva <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../index.php">Administratíva <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
                 <form action="teacherProfil.php" method="post" class="form-inline my-2 my-lg-0">
@@ -96,6 +96,6 @@ if(isset($_SESSION['logged_as'])){
         }
     }
 </script>
-<?php include "includes/footer.php";?>
+<?php include "../includes/footer.php";?>
 </body>
 </html>

@@ -61,20 +61,20 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="sources.php">Zdroje</a>
+                        <a class="nav-link" href="source/sources.php">Zdroje</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             O nás
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="david_g.php">David Gellen</a>
-                            <a class="dropdown-item" href="patrik_i.php">Patrik Ištók</a>
-                            <a class="dropdown-item" href="patrik_k.php">Patrik Kupčulák</a>
-                            <a class="dropdown-item" href="peter_k.php">Peter Krajčí</a>
-                            <a class="dropdown-item" href="zuzana_m.php">Zuzana Medzihradská</a>
+                            <a class="dropdown-item" href="about/david_g.php">David Gellen</a>
+                            <a class="dropdown-item" href="about/patrik_i.php">Patrik Ištók</a>
+                            <a class="dropdown-item" href="about/patrik_k.php">Patrik Kupčulák</a>
+                            <a class="dropdown-item" href="about/peter_k.php">Peter Krajčí</a>
+                            <a class="dropdown-item" href="about/zuzana_m.php">Zuzana Medzihradská</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="goals.php">Ciele</a>
+                            <a class="dropdown-item" href="about/goals.php">Ciele</a>
                         </div>
                     </li>
                 </ul>
