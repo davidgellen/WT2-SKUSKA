@@ -13,7 +13,7 @@ if(isset($_SESSION['logged_as'])){
         //TODO: automaticky prihlas do studentProfil.php
     }
     else if($_SESSION['logged_as'] == "teacher"){
-        header("Location: teacherProfil.php");
+        header("Location: profiles/teacherProfil.php");
     }
 }
 
