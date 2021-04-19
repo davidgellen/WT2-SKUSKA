@@ -46,5 +46,10 @@ footer {
     border: 1px solid black;
 }
 
+.container {
+    margin: 0;
+    width: 100%;
+    max-width: 100vw;
+}
 
 

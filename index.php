@@ -8,15 +8,31 @@ try {
     echo "Error: " . $e->getMessage();
 }
 
+if(isset($_SESSION['logged_as'])){
+    if($_SESSION['logged_as'] == "student"){
+        //TODO: automaticky prihlas do studentProfil.php
+    }
+    else if($_SESSION['logged_as'] == "teacher"){
+        header("Location: teacherProfil.php");
+    }
+}
+
+if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['ais_id'])){
+    //TODO: Prida ziaka do databazi ak neexistuje
+}
+
 if(isset($_POST['email']) && isset($_POST['password'])){
-    $sql = "SELECT email,password FROM teacher";
+    $sql = "SELECT name, surname, email, password FROM teacher";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_NUM);
 
     foreach ($rows as $row) {
-        if($row[0] == $_POST['email'] && password_verify($_POST['password'], $row[1])){
-            header("Location: teacherProfil.php");
+        if($row[2] == $_POST['email'] && password_verify($_POST['password'], $row[3])){
+            $_SESSION['logged_as'] = "teacher";
+            $_SESSION['name'] = $row[0];
+            $_SESSION['surname'] = $row[1];
+            header("Location: index.php");
         }
     }
 }
@@ -79,20 +95,20 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 <form action="index.php" method="post">
                     <div class="form-group">
                         <label for="exam_code">Kód testu:</label><small>(*Zadaj: "QWERT" pre test)</small> <?php //TODO: Po spravnom overeni zmazat ?>
-                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" onchange="confirmCode(this)" required>
+                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" onchange="confirmCode(this)" required> <?php //TODO: name='exam_code' nebude, bude sa overovat ci existuje cez ajax alebo normalne novu stranku ?>
                     </div>
                     <div id="additional_login" style="display: none;">
                         <div class="form-group">
                             <label for="meno">Meno:</label>
-                            <input type="text" class="form-control" id="meno" placeholder="Zadaj meno" required>
+                            <input type="text" name="name" class="form-control" id="meno" placeholder="Zadaj meno" required>
                         </div>
                         <div class="form-group">
                             <label for="priezvisko">Priezvisko:</label>
-                            <input type="text" class="form-control" id="priezvisko" placeholder="Zadaj priezvisko" required>
+                            <input type="text" name="surname" class="form-control" id="priezvisko" placeholder="Zadaj priezvisko" required>
                         </div>
                         <div class="form-group">
                             <label for="ais_id">AIS ID:</label>
-                            <input type="number" class="form-control" id="ais_id" placeholder="Zadaj AIS ID" min="1" required>
+                            <input type="number" name="ais_id" class="form-control" id="ais_id" placeholder="Zadaj AIS ID" min="1" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Prihlásiť</button>
                     </div>
