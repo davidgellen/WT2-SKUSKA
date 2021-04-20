@@ -2,6 +2,9 @@
 session_start();
 
 require_once "../database/Database.php";
+require_once "../database/TestService.php";
+require_once "../database/TeacherService.php";
+
 try {
     $conn = (new Database())->getConnection();
 } catch(PDOException $e) {
@@ -66,18 +69,49 @@ if(isset($_SESSION['logged_as'])){
                 <hr class="style-eight">
                 <div id="profile_menu">
                     <?php //TODO: Menu s roznymi polozkami(zobrazenie testov, pridanie testov,...) - musi byt rovnaky pocet ako v kontextovom okne ?>
-                    <div class="menu_opt" onclick="menuOption(this)" id="opt1">Možnosť 1</div>
-                    <div class="menu_opt" onclick="menuOption(this)" id="opt2">Možnosť 2</div>
+                    <div class="menu_opt" onclick="menuOption(this)" id="opt1">Prehľad testov</div>
+                    <div class="menu_opt" onclick="menuOption(this)" id="opt2">Vytvor test</div>
                 </div>
             </div>
             <div class="col-sm-9 debug" id="content">
                 <?php //TODO: Kontent - rozne veci, bude sa zobrazovat podla menu na ktore klikne ucitel ?>
+
                 <div id="opt1_content" style="display: block;">
-                    Kontent možnosti 1
+
+                    <h2>CHCEME TU BUTTONY NA AKTIVACIU A DEAKTIVACIU?</h2>
+                    
+                    <?php
+
+                        $teacherId = (new TeacherService)->getTeacherFromSession()["id"];
+                        $allTests = (new TestService)->getTestsByTeacherId($teacherId);
+
+                        // TODO: cssko resp. ulozte si to uz ako uznate za vhodne kto to mate na starosti
+                        // v a hrefe je to len provizorne ze aha funguje to 
+                        // cez $test mas pristup k vsetmu z test_template
+                        foreach ($allTests as $test){
+                            echo "<p><a href = '../test/teacher/detail.php?test={$test['code']}'>{$test['name']} STATUS: {$test['status']}</a><p>";
+                        }
+
+                    ?>
 
                 </div>
+
                 <div id="opt2_content" style="display: none;">
-                    Kontent možnosti 2
+                    <h2>Vytvor nový test</h2>
+
+                    <div id = "queuedQuestions">
+
+                        <form id = "createTestForm" method = "post" action = "../source/test/createTest.php">
+
+                            <label for="testName">Meno testu:</label><br>
+                            <input type="text" id="testName" name="testName"><br>
+                            <label for="testDuration">Dlžka testu: </label><br>
+                            <input type="number" id="testDuration" name="testDuration"><br>
+                            <input type="submit" id ="createTestSubmit" value = "Vytvor Test">
+                        
+                        </form>
+
+                    </div>
 
                 </div>
             </div>
