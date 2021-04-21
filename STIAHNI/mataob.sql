@@ -87,8 +87,7 @@ CREATE TABLE `test_template` (
   `name` varchar(255) NOT NULL,
   `code` varchar(16) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `duration` timestamp NOT NULL,
-  `time_to_start` timestamp NOT NULL
+  `duration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --

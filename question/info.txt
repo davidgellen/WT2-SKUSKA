@@ -1,6 +1,0 @@
-mozte si to presunut ak chcete inam, len potom
-aj .js ktore urcuje kam sa to bude redirectovat to treba zmenit
-/source/question/addRedirect.js
-
-
-osobne skripty k tomuto co nesluzia ako view davam do /source/question

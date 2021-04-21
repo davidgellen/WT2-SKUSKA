@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="../../styles/teacherProfile.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
     crossorigin="anonymous"></script>
-    <script src="../../source/test/testActivation.js"></script>
-    <script src="../../source/question/addRedirect.js"></script>
+    <script src="testActivation.js"></script>
+    <script src="addRedirect.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -40,7 +40,7 @@
     
         <h4>Pridanie otázky</h4>
 
-        <form id = "addQuestionForm" method = "post" action = "../../question/addShortAnswer.php">
+        <form id = "addQuestionForm" method = "post" action = "question/addMultipleAnswer.php">
             <input type="hidden" name="testcode" value=<?php echo $testInfo["code"]; ?>>
             <label for="questionType">Typ otázky:</label>
             <select name="questionType" id="questionType" form="addQuestionForm">
@@ -52,8 +52,6 @@
             </select>
             <input type = "submit" value = "Pridať">
         </form>
-
-        <button id = "testRedirect">TestRedirect</button>
     
     </div>
 
