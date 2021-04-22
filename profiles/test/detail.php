@@ -32,6 +32,8 @@
         echo "vytvoril: " . $teacherInfo["name"] . " " . $teacherInfo["surname"] . "<br>";
         echo "<p>status: <span id = 'statusValue'>" . $testInfo["status"] . "</span></p>";
         echo "dlzka: " . $testInfo["duration"] . "<br>";
+        $_SESSION["test"] = $testInfo;
+        echo $_SESSION["test"]["id"] . "<br>";
     ?>
 
     <br><br>
