@@ -3,4 +3,4 @@
 sftp.json
 /.idea/
 database/config.php
-/testTemplatesJSON/*
+/testTemplatesJSON/*.json
