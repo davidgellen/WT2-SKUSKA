@@ -22,7 +22,7 @@
 
     (new TestService)->createTest($teacherId, $_POST["testName"], $_POST["testDuration"], $testCode);
 
-    header('Location: ../../test/teacher/detail.php?test='.$testCode);
+    header('Location: ../../profiles/test/detail.php?test='.$testCode);
 
 ?>
 

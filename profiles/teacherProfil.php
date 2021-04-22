@@ -89,7 +89,7 @@ if(isset($_SESSION['logged_as'])){
                         // v a hrefe je to len provizorne ze aha funguje to 
                         // cez $test mas pristup k vsetmu z test_template
                         foreach ($allTests as $test){
-                            echo "<p><a href = '../test/teacher/detail.php?test={$test['code']}'>{$test['name']} STATUS: {$test['status']}</a><p>";
+                            echo "<p><a href = 'test/detail.php?test={$test['code']}'>{$test['name']} STATUS: {$test['status']}</a><p>";
                         }
 
                     ?>
@@ -101,7 +101,7 @@ if(isset($_SESSION['logged_as'])){
 
                     <div id = "queuedQuestions">
 
-                        <form id = "createTestForm" method = "post" action = "../source/test/createTest.php">
+                        <form id = "createTestForm" method = "post" action = "../scripts/test/createTest.php">
 
                             <label for="testName">Meno testu:</label><br>
                             <input type="text" id="testName" name="testName"><br>

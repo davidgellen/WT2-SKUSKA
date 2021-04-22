@@ -2,26 +2,34 @@
 
 $( document ).ready(function() {
 
+    console.log("testACtivasion");
+
     $("#activateTest").click(function(e){
         e.preventDefault();
         let code = $("#codeValue").html();
         $.ajax({ 
-            url: '../../source/test/activateTest.php',
+            url: '../../scripts/test/activateTest.php',
             type: 'post',
             data: {code: code},
+            success: function(){
+                $("#statusValue").html("1");
+            }
         });
-        $("#statusValue").html("1");
+        
     })
 
     $("#deactivateTest").click(function(e){
         e.preventDefault();
         let code = $("#codeValue").html();
         $.ajax({ 
-            url: '../../source/test/deactivateTest.php',
+            url: '../../scripts/test/deactivateTest.php',
             type: 'post',
             data: {code: code},
+            success: function(){
+                $("#statusValue").html("0");
+            }
         });
-        $("#statusValue").html("0");
+        
     })
 
 });
