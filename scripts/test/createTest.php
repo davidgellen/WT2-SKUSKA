@@ -24,6 +24,7 @@
 
     //create JSON file
     $testId = (new TestService)->getTestByCode($testCode)["id"];
+    chmod("../../testTemplatesJSON", 0777);
     $fp = fopen("../../testTemplatesJSON/test" . $testId . ".json", 'w');
     chmod("../../testTemplatesJSON/test" . $testId . ".json", 0777);
     fwrite($fp, json_encode(["teacher_id" => $teacherId, "name" => $_POST['testName'], "code" => $testCode, 'questions' => array()]));
