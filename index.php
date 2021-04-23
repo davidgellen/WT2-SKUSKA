@@ -19,7 +19,8 @@ if(isset($_SESSION['logged_as'])){
 }
 
 //Kontrola studenta + presmerovanie
-function exist($conn, $ais_id){
+function exist($conn, $ais_id): bool
+{
     $sql = "SELECT ais_id FROM student";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -35,9 +36,9 @@ function exist($conn, $ais_id){
 if(isset($_POST['code']) && isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['ais_id'])){
     $name = $_POST['name'];
     $surname = $_POST['surname'];
+    $ais_id = $_POST['ais_id'];
 
     if(exist($conn, $_POST['ais_id'])){
-        $ais_id = $_POST['ais_id'];
         $sql = "INSERT INTO student (name, surname, ais_id) VALUES ('$name','$surname','$ais_id')";
         $stmt = $conn->prepare($sql);
         $stmt->execute();

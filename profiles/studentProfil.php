@@ -15,7 +15,7 @@ if(isset($_POST['logout'])){
 }
 
 if(isset($_SESSION['logged_as'])){
-    if($_SESSION['logged_as'] == "student"){
+    if(!$_SESSION['logged_as'] == "student"){
         session_destroy();
         header("Location: ../index.php");
     }
