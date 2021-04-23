@@ -177,7 +177,7 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
 
     function confirmCode(code){
         let addit_log = document.getElementById("additional_login");
-        if(code.value === "f02562"){ //TODO: Over pomocou kódu, ktorý je v DB
+        if(code.value === "QWERT"){ //TODO: Over pomocou kódu, ktorý je v DB
             addit_log.style.display = "block";
         }
         else {
