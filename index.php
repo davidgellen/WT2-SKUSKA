@@ -8,20 +8,49 @@ try {
     echo "Error: " . $e->getMessage();
 }
 
+//Presmerovanie
 if(isset($_SESSION['logged_as'])){
     if($_SESSION['logged_as'] == "student"){
-        //TODO: automaticky prihlas do studentProfil.php
+        header("Location: profiles/studentProfil.php");
     }
     else if($_SESSION['logged_as'] == "teacher"){
         header("Location: profiles/teacherProfil.php");
     }
 }
 
-if(isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['ais_id'])){
-    //TODO: Prida ziaka do databazi ak neexistuje
+//Kontrola studenta + presmerovanie
+function exist($conn, $ais_id){
+    $sql = "SELECT ais_id FROM student";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_NUM);
+    foreach($rows as $row){
+        if($row[0] == $ais_id){
+            return false;
+        }
+    }
+    return true;
 }
 
-if(isset($_POST['email']) && isset($_POST['password'])){
+if(isset($_POST['code']) && isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['ais_id'])){
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
+
+    if(exist($conn, $_POST['ais_id'])){
+        $ais_id = $_POST['ais_id'];
+        $sql = "INSERT INTO student (name, surname, ais_id) VALUES ('$name','$surname','$ais_id')";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    }
+
+    $_SESSION['logged_as'] = "student";
+    $_SESSION['name'] = $name;
+    $_SESSION['surname'] = $surname;
+    $_SESSION['ais_id'] = $ais_id;
+    header("Location: index.php");
+}
+//Kontrola ucitela + presmerovanie
+else if(isset($_POST['email']) && isset($_POST['password'])){
     $sql = "SELECT name, surname, email, password FROM teacher";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -95,16 +124,16 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 <form action="index.php" method="post">
                     <div class="form-group">
                         <label for="exam_code">Kód testu:</label><small>(*Zadaj: "QWERT" pre test)</small> <?php //TODO: Po spravnom overeni zmazat ?>
-                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" onchange="confirmCode(this)" required> <?php //TODO: name='exam_code' nebude, bude sa overovat ci existuje cez ajax alebo normalne novu stranku ?>
+                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" onchange="confirmCode(this)" name="code" required> <?php //TODO: name='exam_code' nebude, bude sa overovat ci existuje cez ajax alebo normalne novu stranku ?>
                     </div>
                     <div id="additional_login" style="display: none;">
                         <div class="form-group">
-                            <label for="meno">Meno:</label>
-                            <input type="text" name="name" class="form-control" id="meno" placeholder="Zadaj meno" required>
+                            <label for="name">Meno:</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Zadaj meno" required>
                         </div>
                         <div class="form-group">
-                            <label for="priezvisko">Priezvisko:</label>
-                            <input type="text" name="surname" class="form-control" id="priezvisko" placeholder="Zadaj priezvisko" required>
+                            <label for="surname">Priezvisko:</label>
+                            <input type="text" name="surname" class="form-control" id="surname" placeholder="Zadaj priezvisko" required>
                         </div>
                         <div class="form-group">
                             <label for="ais_id">AIS ID:</label>
@@ -148,7 +177,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 
     function confirmCode(code){
         let addit_log = document.getElementById("additional_login");
-        if(code.value === "QWERT"){ //TODO: Over pomocou kódu, ktorý je v DB
+        if(code.value === "f02562"){ //TODO: Over pomocou kódu, ktorý je v DB
             addit_log.style.display = "block";
         }
         else {
