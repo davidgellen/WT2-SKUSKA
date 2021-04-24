@@ -65,7 +65,6 @@
 
     <?php
         $path = '../../testTemplatesJSON/test' . $_SESSION["test"]["id"] . '.json';
-        //$fp = fopen($path, 'r+');
         $questions = json_decode(file_get_contents($path))->questions;
         foreach ($questions as $key => $question){
             echo "questionID : " . $key . "<br>";
