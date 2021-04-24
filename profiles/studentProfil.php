@@ -26,6 +26,8 @@ if(isset($_SESSION['logged_as'])){
 <!DOCTYPE html>
 <html lang="sk">
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+    crossorigin="anonymous"></script>
     <?php include "../includes/header.php" ?>
     <link rel="stylesheet" href="../styles/styleBody.css">
     <link rel="stylesheet" href="../styles/about.css">
@@ -55,6 +57,11 @@ if(isset($_SESSION['logged_as'])){
     <article>
         <h1>Tu si daj text jaky ces</h1>
         <a  href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a>
+        <?php
+            echo "<pre>";
+            var_dump($_SESSION);
+            echo "</pre>";
+        ?>
     </article>
 </div>
 <?php include "../includes/footer.php";?>

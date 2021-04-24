@@ -37,6 +37,7 @@ if(isset($_POST['code']) && isset($_POST['name']) && isset($_POST['surname']) &&
     $name = $_POST['name'];
     $surname = $_POST['surname'];
     $ais_id = $_POST['ais_id'];
+    $test_code = $_POST['code'];
 
     if(exist($conn, $_POST['ais_id'])){
         $sql = "INSERT INTO student (name, surname, ais_id) VALUES ('$name','$surname','$ais_id')";
@@ -48,6 +49,7 @@ if(isset($_POST['code']) && isset($_POST['name']) && isset($_POST['surname']) &&
     $_SESSION['name'] = $name;
     $_SESSION['surname'] = $surname;
     $_SESSION['ais_id'] = $ais_id;
+    $_SESSION['text_code'] = $test_code;
     header("Location: index.php");
 }
 //Kontrola ucitela + presmerovanie
@@ -122,10 +124,10 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
             </div>
             <br>
             <div id="login_asStudent">
-                <form action="index.php" method="post">
+                <form action="index.php" method="post" id ="login_asStudentForm">
                     <div class="form-group">
-                        <label for="exam_code">Kód testu:</label><small>(*Zadaj: "QWERT" pre test)</small> <?php //TODO: Po spravnom overeni zmazat ?>
-                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" onchange="confirmCode(this)" name="code" required> <?php //TODO: name='exam_code' nebude, bude sa overovat ci existuje cez ajax alebo normalne novu stranku ?>
+                        <label for="exam_code">Kód testu:</label> <?php //TODO: Po spravnom overeni zmazat ?>
+                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" name="code" required> <?php //TODO: name='exam_code' nebude, bude sa overovat ci existuje cez ajax alebo normalne novu stranku ?>
                     </div>
                     <div id="additional_login" style="display: none;">
                         <div class="form-group">
@@ -161,7 +163,10 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
         </div>
     </article>
 </div>
-<script>
+<script>     
+
+    // cast som presunul do scripts/login/checkTestCode.js kvoli doc.ready
+
     function activateForm(form) {
         let loginStudent = document.getElementById("login_asStudent");
         let loginTeacher = document.getElementById("login_asTeacher");
@@ -176,17 +181,8 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
         }
     }
 
-    function confirmCode(code){
-        let addit_log = document.getElementById("additional_login");
-        if(code.value === "QWERT"){ //TODO: Over pomocou kódu, ktorý je v DB
-            addit_log.style.display = "block";
-        }
-        else {
-            addit_log.style.display = "none";
-        }
-    }
-
 </script>
 <?php include "includes/footer.php";?>
+<script src = "scripts/login/checkTestCode.js"></script>
 </body>
 </html>
