@@ -17,14 +17,11 @@ if(isset($_POST['logout'])){
 }
 
 if(isset($_SESSION['logged_as'])){
-    if($_SESSION['logged_as'] == "teacher"){
-        //Do something
+    if(!$_SESSION['logged_as'] == "teacher"){
+        session_destroy();
+        header("Location: ../index.php");
     }
-}else{
-    session_destroy();
-    header("Location: ../index.php");
 }
-
 
 ?>
 
