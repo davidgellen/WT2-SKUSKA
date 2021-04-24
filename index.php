@@ -49,7 +49,7 @@ if(isset($_POST['code']) && isset($_POST['name']) && isset($_POST['surname']) &&
     $_SESSION['name'] = $name;
     $_SESSION['surname'] = $surname;
     $_SESSION['ais_id'] = $ais_id;
-    $_SESSION['text_code'] = $test_code;
+    $_SESSION['test_code'] = $test_code;
     header("Location: index.php");
 }
 //Kontrola ucitela + presmerovanie
