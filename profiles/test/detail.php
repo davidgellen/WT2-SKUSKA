@@ -19,6 +19,7 @@
         include "../../includes/header.php" ;
         require_once "../../database/TestService.php";
         require_once "../../database/TeacherService.php";
+        require_once "../../database/QuestionService.php";
     ?>   
 
     <button onclick="location.href = '../../profiles/teacherProfil.php';" >Home</button><br>
@@ -36,7 +37,12 @@
         echo $_SESSION["test"]["id"] . "<br>";
     ?>
 
-    <br><br>
+    <br>
+    <button id = "activateTest">Aktivovať</button>
+
+    <button id = "deactivateTest">Deaktivovať</button>
+    
+    <br>
 
     <div>
     
@@ -57,11 +63,21 @@
     
     </div>
 
+    <?php
+        $path = '../../testTemplatesJSON/test' . $_SESSION["test"]["id"] . '.json';
+        //$fp = fopen($path, 'r+');
+        $questions = json_decode(file_get_contents($path))->questions;
+        foreach ($questions as $key => $question){
+            echo "questionID : " . $key . "<br>";
+            echo "typ: " . formatQuestionType($question->type) . "<br>";
+            echo "zadanie: " . $question->question . "<br>";
+            echo "správna odpoveď: " . $question->correctAnswer . "<br>";
+            echo "bodovanie: " . $question->points . "<br>";
+            echo "<br>";
+        }
+    ?>
+
     <br><br>
-
-    <button id = "activateTest">Aktivovať</button>
-
-    <button id = "deactivateTest">Deaktivovať</button>
 
     <h2>zoznam studentov, co ten test zacali robit</h2>
     <p>kliknutim na nich sa presmerujeme na stranku, kde je test ktory ziak vyplnil, teda ak ho odovzdal<p>
@@ -69,3 +85,23 @@
 </body>
 </html>
 
+<?php
+
+    function formatQuestionType($type){
+        switch($type){
+            case "short":
+                return "Krátka odpoveď";
+            case "pair":
+                return "Priraďovanie";
+            case "pair":
+                return "Priraďovanie";
+            case "pair":
+                return "Priraďovanie";
+            case "pair":
+                return "Priraďovanie";
+            default:
+                return "ak toto nastalo tak sa nieco pokaslalo";
+        }
+    }
+
+?>
