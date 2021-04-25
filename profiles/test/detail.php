@@ -70,7 +70,7 @@
             echo "questionID : " . $key . "<br>";
             echo "typ: " . formatQuestionType($question->type) . "<br>";
             echo "zadanie: " . $question->question . "<br>";
-            echo "správna odpoveď: " . $question->correctAnswer . "<br>";
+            //echo "správna odpoveď: " . $question->correctAnswer . "<br>";
             echo "bodovanie: " . $question->points . "<br>";
             echo "<br>";
         }
@@ -92,12 +92,12 @@
                 return "Krátka odpoveď";
             case "pair":
                 return "Priraďovanie";
-            case "pair":
-                return "Priraďovanie";
-            case "pair":
-                return "Priraďovanie";
-            case "pair":
-                return "Priraďovanie";
+            case "math":
+                return "Matematika";
+            case "multi":
+                return "Multi uz ani neviem co to mam robit";
+            case "draw":
+                return "Kreslenie";
             default:
                 return "ak toto nastalo tak sa nieco pokaslalo";
         }
