@@ -42,7 +42,7 @@
         </nav>
     </header>
     <article>
-        <h1>Tu si daj text jaky ces</h1>
+        <h1>tieto math editory sa starsie jak zdena studenkova s kralovnout alzbetou 2. dokopy</h1>
         <a href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a>
     </article>
 </div>

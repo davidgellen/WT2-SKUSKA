@@ -101,6 +101,9 @@ if(isset($_SESSION['logged_as'])){
                         ?>
                             <?php //tu sa nacita rovnica ktoru zadal ucitel ?>
                             <div class="renderedEq" data-qid = <?php echo "\"".$key."\""; ?>></div>
+                            <button class = "mathRedirectBtn" data-qid = <?php echo "\"".$key."\""; ?>>Vypln</button>
+                            <div><p>Odpoved:</p></div>
+                            <div class="renderedEqInput" data-qid = <?php echo "\"".$key."\""; ?>></div>
                         <?php
                         break;
                     default:
@@ -116,8 +119,6 @@ if(isset($_SESSION['logged_as'])){
 <script>
     $(document).ready(function(){
         $('.renderedEq').each(function(index) {
-            console.log($(this).data("qid"));
-            //console.log('../testTemplateJSON/test'+ $('#testIdHead').html() +'.json');
             fetch('../testTemplatesJSON/test'+ $('#testIdHead').html() +'.json')
                 .then(response => response.json())
                 .then(json => {
@@ -127,12 +128,32 @@ if(isset($_SESSION['logged_as'])){
                         var equation = eqEd.Equation.constructFromJsonObj(jsonObj);
                         $(this).empty();
                         $(this).append(equation.domObj.value);
-                        equation.updateAll()
+                        equation.updateAll();
                     }
-                    catch(error){
-                        console.log(error);
+                    catch(error){ 
+                        console.log(error); // ani tu byt nemusi len to robi bordel vsade
                     }
                 })
+        });
+
+        $('.mathRedirectBtn').click(function(e){ // otvori novy window pre input math vyrazu
+            window.open("testStudent/insertMath.php?qid="+$(this).data("qid"), '_blank').focus();
+        })
+
+        window.addEventListener('storage', () => { // zobere input a vlozi ho do prislusnej odpovede
+            let mathQid = localStorage.getItem("mathqid");
+            let jsonToRender = $.parseJSON(localStorage.getItem("answerJson")); // localstorage len stringy bere
+            let allInput = $(".renderedEqInput");
+            allInput.each(function(index){
+                if ($(this).data("qid") ==  parseInt(mathQid)){
+                    let equation = eqEd.Equation.constructFromJsonObj(jsonToRender);
+                    $(this).empty();
+                    $(this).append(equation.domObj.value);
+                    equation.updateAll();
+                }
+            })
+            
+            //$("#result").html(localStorage.getItem("index"));
         });
     })
 
