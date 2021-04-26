@@ -12,7 +12,7 @@
     echo "</pre>";
 
     $question = $_POST["questionText"];
-    $answer = $_POST["answer"];
+    //$answer = $_POST["answer"];
     $points = $_POST["points"];
     $equationJsonString = $_POST["equationJsonForm"];
     $type = "math";
@@ -29,7 +29,7 @@
     $allQuestions = $content['questions'];
     $allQuestions[$questionId] = $data;
     $content['questions'] = $allQuestions;
-    var_dump($content);
+    //var_dump($content);
     fwrite($fp, json_encode($content));
     fclose($fp);
 

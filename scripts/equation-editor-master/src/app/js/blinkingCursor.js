@@ -2,8 +2,6 @@ var toggleCursorVisibility = function() {
     $('.cursor').toggleClass('cursorOff');
 }
 
-console.log("DOBRE SI");
-
 var cursorBlinkTimers = new Array();
 
 var addBlink = function() {

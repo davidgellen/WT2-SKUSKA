@@ -57,49 +57,87 @@ if(isset($_SESSION['logged_as'])){
     </header>
     <article>
         <h1>Tu si daj text jaky ces</h1>
+        
         <a  href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a><br>
         <?php
             
             $testId = (new TestService)->getTestByCode($_SESSION["test_code"])["id"];
+            //to id sa pouziva v js scripte, ak chces zmenit kvoli css alebo daco bud
+            // napis Davidovi alebo tam len daj display none
+            echo '<h2>Test id: <span id = "testIdHead">'.$testId.'</span></h2>';
             $path = '../testTemplatesJSON/test' . $testId . '.json';
             //$fp = fopen($path, 'r+');
             $questions = json_decode(file_get_contents($path))->questions;
             foreach ($questions as $key => $question){
+                echo "<p>";
                 echo "questionID: " . $key . "<br>";
                 echo "Typ: " . $question->type . "<br>";
+                echo "<span class = 'font-weight-bold'>Zadanie: </span>" . $question->question . "<br>";
+                echo "</p>";
                 // tuna sa dava ako sa zobrazi otazka a jak ju bude vyplnat student
                 // ak je kodu vela dajte do ineho suboru a potom len include("cesta k suboru")
                 // lebo sa v tom ani jurko nevyzna
                 switch ($question->type){
                     case "short":
-                        echo "switch short vetva<br>";
+                        echo "<p>switch short vetva</p><br>";
                         // Zuzka
                         break;
                     case "multi":
-                        echo "switch multi vetva<br>";
+                        echo "<p>switch multi vetva</p><br>";
                         // Zuzka
                         break;
                     case "pair":
-                        echo "switch pair vetva<br>";
+                        echo "<p>switch pair vetva</p><br>";
                         // Peter
                         break;
                     case "draw":
-                        echo "switch draw vetva<br>";
+                        echo "<p>switch draw vetva</p><br>";
                         // Pato
                         break;
                     case "math":
-                        echo "switch math vetva<br>";
-                        // David
+                        // echo "<pre>";
+                        // var_dump($question->equationJsonString);
+                        // echo "</pre>";
+                        ?>
+                            <?php //tu sa nacita rovnica ktoru zadal ucitel ?>
+                            <div class="renderedEq" data-qid = <?php echo "\"".$key."\""; ?>></div>
+                        <?php
                         break;
                     default:
                         break;
                 }
-                echo "<br>";
+                echo "----------------------<br>";
             }
 
         ?>
     </article>
 </div>
 <?php include "../includes/footer.php";?>
+<script>
+    $(document).ready(function(){
+        $('.renderedEq').each(function(index) {
+            console.log($(this).data("qid"));
+            //console.log('../testTemplateJSON/test'+ $('#testIdHead').html() +'.json');
+            fetch('../testTemplatesJSON/test'+ $('#testIdHead').html() +'.json')
+                .then(response => response.json())
+                .then(json => {
+                    try{
+                        let jsonObj = $.parseJSON(json["questions"][$(this).data("qid")]["equationJsonString"]);
+                        //console.log(equationJson);
+                        var equation = eqEd.Equation.constructFromJsonObj(jsonObj);
+                        $(this).empty();
+                        $(this).append(equation.domObj.value);
+                        equation.updateAll()
+                    }
+                    catch(error){
+                        console.log(error);
+                    }
+                })
+        });
+    })
+
+    
+</script>
+<?php include "../includes/mathQuestion/studentProfilMathPaths.php";?>
 </body>
 </html>
