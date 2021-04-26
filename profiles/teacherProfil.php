@@ -36,7 +36,7 @@ if(isset($_SESSION['logged_as'])){
 <div class="wrapper flex-grow-1 center-content" id="betterWidth">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="../index.php">BohovskaOhromnaAplikacia</a>
+            <a class="navbar-brand" href="../index.php"><?php include "../includes/name_page.php" ?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
