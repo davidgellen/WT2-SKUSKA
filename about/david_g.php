@@ -10,7 +10,7 @@
 <div class="wrapper flex-grow-1 center-content" id="betterWidth">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="../index.php">BohovskaOhromnaAplikacia</a>
+            <a class="navbar-brand" href="../index.php"><?php include "../includes/name_page.php" ?></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -42,7 +42,7 @@
         </nav>
     </header>
     <article>
-        <h1>Tu si daj text jaky ces</h1>
+        <h1>tieto math editory sa starsie jak zdena studenkova s kralovnout alzbetou 2. dokopy</h1>
         <a href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a>
     </article>
 </div>
