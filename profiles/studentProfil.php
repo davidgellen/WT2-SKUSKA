@@ -4,6 +4,8 @@ session_start();
 require_once "../database/Database.php";
 require_once "../database/TestService.php";
 
+ini_set("display_errors", 1);
+
 try {
     $conn = (new Database())->getConnection();
 } catch(PDOException $e) {
@@ -20,6 +22,23 @@ if(isset($_SESSION['logged_as'])){
         session_destroy();
         header("Location: ../index.php");
     }
+}
+
+
+$testId = (new TestService)->getTestByCode($_SESSION["test_code"])["id"];
+//to id sa pouziva v js scripte, ak chces zmenit kvoli css alebo daco bud
+// napis Davidovi alebo tam len daj display none
+
+$path = '../testTemplatesJSON/test' . $testId . '.json';
+//$fp = fopen($path, 'r+');
+$testFile = json_decode(file_get_contents($path));
+$questions = $testFile->questions;
+
+
+//zaciatok odratavania casu
+if(!isset($_SESSION['start_time'])){
+    $_SESSION['start_time'] = time();
+    $_SESSION['target_time'] = $_SESSION['start_time'] + $testFile->duration*60;
 }
 
 ?>
@@ -59,15 +78,11 @@ if(isset($_SESSION['logged_as'])){
         <h1>Tu si daj text jaky ces</h1>
         
         <a  href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a><br>
+
+        <div id="countdown"> <?= strval(date("i", $_SESSION['target_time']-time())) .":". strval(date("s", $_SESSION['target_time']-time())) ?> </div>
         <?php
             
-            $testId = (new TestService)->getTestByCode($_SESSION["test_code"])["id"];
-            //to id sa pouziva v js scripte, ak chces zmenit kvoli css alebo daco bud
-            // napis Davidovi alebo tam len daj display none
             echo '<h2>Test id: <span id = "testIdHead">'.$testId.'</span></h2>';
-            $path = '../testTemplatesJSON/test' . $testId . '.json';
-            //$fp = fopen($path, 'r+');
-            $questions = json_decode(file_get_contents($path))->questions;
             foreach ($questions as $key => $question){
                 echo "<p>";
                 echo "questionID: " . $key . "<br>";
@@ -113,11 +128,35 @@ if(isset($_SESSION['logged_as'])){
             }
 
         ?>
+        <input type="button" id="endTest" name="endTest" value="Odovzdať">
     </article>
 </div>
 <?php include "../includes/footer.php";?>
 <script>
     $(document).ready(function(){
+
+        //odratavanie casu
+        var timer2 = <?= strval(date("i", $_SESSION['target_time']-time())) ?> + ":" + <?= strval(date("s", $_SESSION['target_time']-time())) ?> ;
+        var interval = setInterval(function() {
+        var timer = timer2.split(':');
+        //by parsing integer, I avoid all extra string processing
+        var minutes = parseInt(timer[0], 10);
+        var seconds = parseInt(timer[1], 10);
+        --seconds;
+        minutes = (seconds < 0) ? --minutes : minutes;
+        if (minutes < 0) clearInterval(interval);
+        seconds = (seconds < 0) ? 59 : seconds;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+        if ((seconds <= 0) && (minutes <= 0)) {
+            clearInterval(interval);
+            $('#endTest').click();
+        }
+        $('#countdown').html(minutes + ':' + seconds);
+        timer2 = minutes + ':' + seconds;
+        }, 1000);
+
+
+
         $('.renderedEq').each(function(index) {
             fetch('../testTemplatesJSON/test'+ $('#testIdHead').html() +'.json')
                 .then(response => response.json())
@@ -159,6 +198,7 @@ if(isset($_SESSION['logged_as'])){
 
     
 </script>
+<script src="testStudent/submitTest.js"></script>
 <?php include "../includes/mathQuestion/studentProfilMathPaths.php";?>
 </body>
 </html>
