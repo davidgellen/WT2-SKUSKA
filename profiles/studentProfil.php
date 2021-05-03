@@ -34,11 +34,11 @@ $path = '../testTemplatesJSON/test' . $testId . '.json';
 $testFile = json_decode(file_get_contents($path));
 $questions = $testFile->questions;
 
-
+$testDuration = (new TestService)->getTestByCode($_SESSION['test_code'])['duration'];
 //zaciatok odratavania casu
 if(!isset($_SESSION['start_time'])){
     $_SESSION['start_time'] = time();
-    $_SESSION['target_time'] = $_SESSION['start_time'] + $testFile->duration*60;
+    $_SESSION['target_time'] = $_SESSION['start_time'] + $testDuration*60;
 }
 
 ?>
