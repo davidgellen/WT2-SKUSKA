@@ -75,10 +75,11 @@ if(isset($_SESSION['logged_as'])){
 
                 <div id="opt1_content" style="display: block;">
 
-                    <h2>CHCEME TU BUTTONY NA AKTIVACIU A DEAKTIVACIU?</h2>
+
                     
                     <?php
-
+                    /*
+                        echo '<h2>CHCEME TU BUTTONY NA AKTIVACIU A DEAKTIVACIU?</h2>';
                         $teacherId = (new TeacherService)->getTeacherFromSession()["id"];
                         $allTests = (new TestService)->getTestsByTeacherId($teacherId);
 
@@ -88,28 +89,73 @@ if(isset($_SESSION['logged_as'])){
                         foreach ($allTests as $test){
                             echo "<p><a href = 'test/detail.php?test={$test['code']}'>{$test['name']} STATUS: {$test['status']}</a><p>";
                         }
-
+                    */
                     ?>
+                    <h2 style="text-align: center;">Testy</h2>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-8" id="testViewTests">
+                                <!--Toto menu povodne bolo medzi 'container' a 'row'-->
+                                <div class="row view_test_opt_menu">
+                                    <div class="view_test_opt" onclick="viewMenuOption(this)" id="opt1_view1">Aktívne</div>
+                                    <div class="view_test_opt" onclick="viewMenuOption(this)" id="opt1_view2">Neaktívne</div>
+                                </div>
 
+                                <div id="opt_view_content1" style="display:block;">
+                                    <strong>Aktívne testy</strong><br>
+                                    <?php
+                                    $teacherId = (new TeacherService)->getTeacherFromSession()["id"];
+                                    $allTests = (new TestService)->getTestsByTeacherId($teacherId);
+                                    $tmp = 0;
+                                    foreach ($allTests as $test){
+                                        if(!strcmp($test['status'], "1")){ //0 if equal
+                                            echo "<a href = 'test/detail.php?test={$test['code']}'>Test(".$test['code']."): {$test['name']}</a><br>";
+                                            $tmp=1;
+                                        }
+                                    }
+                                    if(!$tmp) echo "Žiadne testy";
+                                    ?>
+
+                                </div>
+                                <div id="opt_view_content2" style="display:none;">
+                                    <strong>Neaktívne testy</strong><br>
+                                    <?php
+                                    $teacherId = (new TeacherService)->getTeacherFromSession()["id"];
+                                    $allTests = (new TestService)->getTestsByTeacherId($teacherId);
+                                    $tmp = 0;
+                                    echo "<ul>";
+                                    foreach ($allTests as $test){
+                                        if(!strcmp($test['status'], "0")){ //0 if equal
+                                            echo "<li><a href = 'test/detail.php?test={$test['code']}'>Test(".$test['code']."): {$test['name']}</a></li>";
+                                            $tmp=1;
+                                        }
+                                    }
+                                    echo "</ul>";
+                                    if(!$tmp) echo "Žiadne testy";
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="col-sm-4" id="testViewInfo">
+                                <h5>Inštrukcie:</h5>
+                                <p>Formát testov: Test(kód testu): Názov testu</p>
+                                <p>Vo výbere aktívnych/neaktívnych testoch po otvorení konkrétneho testu sa otvorí okno s podrobnými informáciami o teste.</p>
+                                <p>Test sa dá aktivovať alebo deaktivovať, alebo pridať nové otázky, alebo si ich prezrieť.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="opt2_content" style="display: none;">
                     <h2>Vytvor nový test</h2>
-
                     <div id = "queuedQuestions">
-
                         <form id = "createTestForm" method = "post" action = "../scripts/test/createTest.php">
-
                             <label for="testName">Meno testu:</label><br>
                             <input type="text" id="testName" name="testName"><br>
                             <label for="testDuration">Dlžka testu: </label><br>
                             <input type="number" id="testDuration" name="testDuration"><br>
                             <input type="submit" id ="createTestSubmit" value = "Vytvor Test">
-                        
                         </form>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -121,8 +167,20 @@ if(isset($_SESSION['logged_as'])){
         for(let i = 1; i <= options; i++){
             if(option.id !== "opt"+(i)){
                 document.getElementById("opt"+(i)+"_content").style.display = "none";
-            }else{
+            } else{
                 document.getElementById(option.id+"_content").style.display = "block";
+            }
+        }
+    }
+
+    function viewMenuOption(option) {
+        for(let i = 1; i <= 2; i++){
+            if(option.id !== "opt1_view"+(i)){
+                document.getElementById("opt_view_content"+(i)).style.display = "none";
+                document.getElementById("opt1_view"+(i)).style.animation = "none";
+            } else {
+                document.getElementById("opt_view_content"+(i)).style.display = "block";
+                document.getElementById("opt1_view"+(i)).style.animation = "option_test_view 0.5s";
             }
         }
     }

@@ -43,6 +43,59 @@ hr.style-eight {
 
 }
 
+.view_test_opt_menu{
+    padding: 2em 5em;
+}
+
+.view_test_opt {
+    text-align: center;
+    cursor: pointer;
+    border-left: 2px solid #811849;
+    border-bottom: 3px solid #811849;
+    border-radius: 100%;
+    width: 25%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: relative;
+    background: #d00d68;
+    color: white;
+    padding: 0.5em;
+}
+
+.view_test_opt:hover{
+    background: #ac165c;
+}
+
+@keyframes option_test_view {
+    0%{left: 0; top: 0;}
+    25%{left: -5px; top: 3px;}
+    100%{left: 0; top: 0;}
+}
+
+#testViewTests{
+
+}
+
+#testViewInfo{
+    border: 1px dotted black;
+    border-radius: 3px;
+    background-color: rgba(163,209,255,0.35);
+}
+
+a:link, a:visited {
+    color: #141da4;
+    text-decoration: none;
+}
+
+a:link:active, a:visited:active, a:hover {
+    color: #ffffff;
+}
+
+h2{
+    padding-bottom: 1.5em;
+}
+
 .debug{ /*TODO: Potom zmazať*/
     border: 3px dotted black;
 }
