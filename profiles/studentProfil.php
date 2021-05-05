@@ -3,6 +3,8 @@ session_start();
 
 require_once "../database/Database.php";
 require_once "../database/TestService.php";
+require_once "../database/StudentTestService.php";
+
 
 ini_set("display_errors", 1);
 
@@ -13,6 +15,7 @@ try {
 }
 
 if(isset($_POST['logout'])){
+    (new StudentTestService)->updateActivityState($_SESSION['recordId'], 0);
     session_destroy();
     header("Location: ../index.php");
 }
@@ -36,8 +39,22 @@ $questions = $testFile->questions;
 
 $testDuration = (new TestService)->getTestByCode($_SESSION['test_code'])['duration'];
 //zaciatok odratavania casu
+
+$stmt = $conn->prepare("SELECT id FROM student WHERE ais_id=?");
+$stmt->execute([$_SESSION['ais_id']]);
+$studentId = $stmt->fetchColumn();
+
 if(!isset($_SESSION['start_time'])){
-    $_SESSION['start_time'] = time();
+    $testStudentRecord = (new StudentTestService)->getRecord($testId, $studentId);
+    if(count($testStudentRecord)==0){
+        $_SESSION['start_time'] = time();
+        $_SESSION['recordId'] = (new StudentTestService)->addNewRecord($testId, $studentId, 0, 1, $_SESSION['start_time']);
+        $testStudentRecord = (new StudentTestService)->getRecord($testId, $studentId);
+    } else{
+        $_SESSION['recordId'] = $testStudentRecord[0]['id'];
+        (new StudentTestService)->updateActivityState($_SESSION['recordId'], 1); 
+        $_SESSION['start_time'] = strtotime($testStudentRecord[0]['start_time']);
+    }
     $_SESSION['target_time'] = $_SESSION['start_time'] + $testDuration*60;
 }
 
@@ -75,6 +92,8 @@ if(!isset($_SESSION['start_time'])){
         </nav>
     </header>
     <article>
+        <p>Prihlaseny: <span id="name"><?=$_SESSION['name']?> </span><span id="surname"><?=$_SESSION['surname']?> </span></p>
+        <p>ID: <span id="ais_id"><?=$_SESSION['ais_id']?></span></p>
         <h1>Tu si daj text jaky ces</h1>
         
         <a  href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a><br>
@@ -147,6 +166,7 @@ if(!isset($_SESSION['start_time'])){
         if (minutes < 0) clearInterval(interval);
         seconds = (seconds < 0) ? 59 : seconds;
         seconds = (seconds < 10) ? '0' + seconds : seconds;
+        if(minutes < 4) $('#countdown').css('color', 'red');
         if ((seconds <= 0) && (minutes <= 0)) {
             clearInterval(interval);
             $('#endTest').click();
