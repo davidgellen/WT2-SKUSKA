@@ -7,6 +7,7 @@ require_once "../database/StudentTestService.php";
 
 
 ini_set("display_errors", 1);
+var_dump($_SESSION['recordID']);
 
 try {
     $conn = (new Database())->getConnection();
