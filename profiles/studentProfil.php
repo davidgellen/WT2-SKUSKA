@@ -46,11 +46,28 @@ $studentId = $stmt->fetchColumn();
 
 if(!isset($_SESSION['start_time'])){
     $testStudentRecord = (new StudentTestService)->getRecord($testId, $studentId);
-    if(count($testStudentRecord)==0){
+    if(count($testStudentRecord)==0){                               //ak sa na tento test este takyto student neprihlasil
         $_SESSION['start_time'] = time();
         $_SESSION['recordId'] = (new StudentTestService)->addNewRecord($testId, $studentId, 0, 1, $_SESSION['start_time']);
         $testStudentRecord = (new StudentTestService)->getRecord($testId, $studentId);
-    } else{
+
+        //ID otazok z test templatu
+        $fpQuestions = fopen('../testTemplatesJSON/test'.$testId.'.json', 'r+');
+        $contentObject = file_get_contents('../testTemplatesJSON/test'.$testId.'.json');
+        $contentObject = json_encode($contentObject);
+        $decoded = json_decode($contentObject, true);
+        $content = json_decode($decoded, true);
+        $allQuestions = $content['questions'];
+        $qIds = array();
+        foreach($allQuestions as $qKey => $qValue){
+            $qIds[$qKey] = array();
+        }
+        //vytvorenie JSON file-u studenta pre dany test
+        $fp = fopen("../testStudentsJSON/test".$testId . "/" . $_SESSION['ais_id'] . ".json", 'w');
+        chmod("../testStudentsJSON/test" .$testId . "/" . $_SESSION['ais_id'] . ".json", 0777);
+        fwrite($fp, json_encode(['test_id' => $testId, 'ais_id' => $_SESSION['ais_id'], 'answers' => $qIds]));
+        fclose($fp);
+    } else{                                                         //ak sa na tento test uz takyto student prihlasil pred tym
         $_SESSION['recordId'] = $testStudentRecord[0]['id'];
         (new StudentTestService)->updateActivityState($_SESSION['recordId'], 1); 
         $_SESSION['start_time'] = strtotime($testStudentRecord[0]['start_time']);

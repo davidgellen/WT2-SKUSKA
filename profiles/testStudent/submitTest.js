@@ -4,6 +4,7 @@ $('#endTest').click( function(e) {
     console.log("odovzdalo sa");
     console.log($("#countdown").text());
 
+    //sem treba doplnit odpovede na jednotlive otazky
     var testData = {
         test_id: $("#testIdHead").text(),
         ais_id: $("#ais_id").text(),
@@ -17,7 +18,9 @@ $('#endTest').click( function(e) {
         dataType: "json",
         encode: true,
         success: function(data){
-             console.log(data);
+            console.log(data);
+            window.location.href = "testStudent/endTest.php";
         }
-    })
+    });
+
 })
