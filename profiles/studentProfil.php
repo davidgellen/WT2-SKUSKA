@@ -64,6 +64,9 @@ if(!isset($_SESSION['start_time'])){
             $qIds[$qKey] = array();
         }
         //vytvorenie JSON file-u studenta pre dany test
+        if (!file_exists('../testStudentsJSON/test'.$testId)) {
+            mkdir('../../testStudentsJSON/test'.$testId, 0777, true);
+        }
         $fp = fopen("../testStudentsJSON/test".$testId . "/" . $_SESSION['ais_id'] . ".json", 'w');
         chmod("../testStudentsJSON/test" .$testId . "/" . $_SESSION['ais_id'] . ".json", 0777);
         fwrite($fp, json_encode(['test_id' => $testId, 'ais_id' => $_SESSION['ais_id'], 'answers' => $qIds]));
