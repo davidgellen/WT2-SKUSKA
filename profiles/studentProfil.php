@@ -7,7 +7,6 @@ require_once "../database/StudentTestService.php";
 
 
 ini_set("display_errors", 1);
-var_dump($_SESSION['recordID']);
 
 try {
     $conn = (new Database())->getConnection();
@@ -53,14 +52,14 @@ if(!isset($_SESSION['start_time'])){
         $testStudentRecord = (new StudentTestService)->getRecord($testId, $studentId);
 
         //ID otazok z test templatu
-        $fpQuestions = fopen('../testTemplatesJSON/test'.$testId.'.json', 'r+');
-        $contentObject = file_get_contents('../testTemplatesJSON/test'.$testId.'.json');
-        $contentObject = json_encode($contentObject);
-        $decoded = json_decode($contentObject, true);
-        $content = json_decode($decoded, true);
-        $allQuestions = $content['questions'];
+        // $fpQuestions = fopen('../testTemplatesJSON/test'.$testId.'.json', 'r+');
+        // $contentObject = file_get_contents('../testTemplatesJSON/test'.$testId.'.json');
+        // $contentObject = json_encode($contentObject);
+        // $decoded = json_decode($contentObject, true);
+        // $content = json_decode($decoded, true);
+        // $allQuestions = $content['questions'];
         $qIds = array();
-        foreach($allQuestions as $qKey => $qValue){
+        foreach($questions as $qKey => $qValue){
             $qIds[$qKey] = array();
         }
         //vytvorenie JSON file-u studenta pre dany test
@@ -77,6 +76,10 @@ if(!isset($_SESSION['start_time'])){
         $_SESSION['start_time'] = strtotime($testStudentRecord[0]['start_time']);
     }
     $_SESSION['target_time'] = $_SESSION['start_time'] + $testDuration*60;
+}
+
+if ($_SESSION['target_time']-time() < 0){
+    header("Location: testStudent/endTest.php");
 }
 
 ?>
@@ -114,7 +117,7 @@ if(!isset($_SESSION['start_time'])){
     </header>
     <article>
         <p>Prihlaseny: <span id="name"><?=$_SESSION['name']?> </span><span id="surname"><?=$_SESSION['surname']?> </span></p>
-        <p>ID: <span id="ais_id"><?=$_SESSION['ais_id']?></span></p>
+        <p>ID: <span id="aisId"><?=$_SESSION['ais_id']?></span></p>
         <h1>Tu si daj text jaky ces</h1>
         
         <a  href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a><br>
@@ -134,7 +137,7 @@ if(!isset($_SESSION['start_time'])){
                 // lebo sa v tom ani jurko nevyzna
                 switch ($question->type){
                     case "short":
-                        echo "<p>switch short vetva</p><br>";
+                        echo "<input type='text' class='questionShort' id='". $key . "'><br>";
                         // Zuzka
                         break;
                     case "multi":

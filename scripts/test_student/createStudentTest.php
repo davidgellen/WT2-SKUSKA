@@ -12,10 +12,30 @@ if(isset($_SESSION['logged_as'])){
 
 $result = "";
 if(isset($_POST)){
+    $testId = $_POST['testId'];
+    $aisId = $_POST['aisId'];
+    $path = "../../testStudentsJSON/test".$testId."/".$aisId.".json";
 
-    // (new StudentTestService)->
+    
+    $fp = fopen($path, 'r+');
+    $contentObject = file_get_contents($path);
+    $contentObject = json_encode($contentObject);
+    $decoded = json_decode($contentObject, true);
+    $content = json_decode($decoded, true);
+    $allAnswers = $content['answers'];
 
-    echo json_encode($_POST);
+    foreach($_POST as $key => $value){
+        if(strcmp($key, "testId")==0 || strcmp($key, 'aisId')==0) continue;
+        $allAnswers[$key] = $value;
+    }
+
+    $content['answers'] = $allAnswers;
+    var_dump($content);
+    fwrite($fp, json_encode($content));
+    fclose($fp);
+    
+
+    $result = $content;
 }
 
 echo $result;

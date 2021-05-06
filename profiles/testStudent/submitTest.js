@@ -4,11 +4,20 @@ $('#endTest').click( function(e) {
     console.log("odovzdalo sa");
     console.log($("#countdown").text());
 
+    var shortQuestions = $(".questionShort");
+    console.log(shortQuestions.length);
+
     //sem treba doplnit odpovede na jednotlive otazky
     var testData = {
-        test_id: $("#testIdHead").text(),
-        ais_id: $("#ais_id").text(),
+        testId: $("#testIdHead").text(),
+        aisId: $("#aisId").text(),
     };
+
+    //prida do testData odpovede na otazky S KRATKOU ODPOVEDOU
+    for(var i = 0; i<shortQuestions.length; i++){
+        testData[shortQuestions[i]['id']] = shortQuestions[i]['value'];
+    }
+
 
     e.preventDefault();
     $.ajax({
