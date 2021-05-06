@@ -22,8 +22,13 @@
 
     (new TestService)->createTest($teacherId, $_POST["testName"], $_POST["testDuration"], $testCode);
 
-    //create JSON file
+    //create test folder
     $testId = (new TestService)->getTestByCode($testCode)["id"];
+    if (!file_exists('../../testStudentsJSON/test'.$testId)) {
+        mkdir('../../testStudentsJSON/test'.$testId, 0777, true);
+    }
+
+    //create JSON file
     chmod("../../testTemplatesJSON", 0777);
     $fp = fopen("../../testTemplatesJSON/test" . $testId . ".json", 'w');
     chmod("../../testTemplatesJSON/test" . $testId . ".json", 0777);
