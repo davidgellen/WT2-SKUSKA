@@ -26,7 +26,7 @@ $('#endTest').click( function(e) {
         data: testData,
         dataType: "json",
         encode: true,
-        success: function(data){
+        complete: function(data){
             console.log(data);
             window.location.href = "testStudent/endTest.php";
         }

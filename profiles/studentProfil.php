@@ -78,7 +78,7 @@ if(!isset($_SESSION['start_time'])){
     $_SESSION['target_time'] = $_SESSION['start_time'] + $testDuration*60;
 }
 
-if ($_SESSION['target_time']-time() < 0){
+if ($_SESSION['start_time'] + $testDuration*60 < time()){
     header("Location: testStudent/endTest.php");
 }
 
