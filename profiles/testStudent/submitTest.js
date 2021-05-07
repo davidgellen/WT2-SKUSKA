@@ -1,6 +1,6 @@
 //odoslanie odpovedi studenta
 
-var mathAnswers = new Object();
+var mathAnswers = new Object(); // math jsony
 window.addEventListener('storage', () => { 
     let mathQid = localStorage.getItem("mathqid");
     let jsonToRender = $.parseJSON(localStorage.getItem("answerJson"));
@@ -19,8 +19,6 @@ $('#endTest').click( function(e) {
         testId: $("#testIdHead").text(),
         aisId: $("#aisId").text(),
     };
-
-    let allAns = new Object();
     
     //prida do testData odpovede na otazky S KRATKOU ODPOVEDOU
     for(var i = 0; i<shortQuestions.length; i++){
@@ -28,10 +26,8 @@ $('#endTest').click( function(e) {
     }
 
     for (let key in mathAnswers){
-        console.log(key);
         testData[key] = mathAnswers[key];
     }
-
 
     e.preventDefault();
     $.ajax({
