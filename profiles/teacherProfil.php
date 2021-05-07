@@ -48,7 +48,7 @@ if(isset($_SESSION['logged_as'])){
                     </li>
                 </ul>
                 <form action="teacherProfil.php" method="post" class="form-inline my-2 my-lg-0">
-                    <input type='submit' name='logout' value='Odhlásiť sa'>
+                    <input type='submit' name='logout' value='Odhlásiť sa' class="btnDetail">
                 </form>
             </div>
         </nav>
@@ -72,29 +72,11 @@ if(isset($_SESSION['logged_as'])){
             </div>
             <div class="col-sm-9 debug" id="content">
                 <?php //TODO: Kontent - rozne veci, bude sa zobrazovat podla menu na ktore klikne ucitel ?>
-
                 <div id="opt1_content" style="display: block;">
-
-
-                    
-                    <?php
-                    /*
-                        echo '<h2>CHCEME TU BUTTONY NA AKTIVACIU A DEAKTIVACIU?</h2>';
-                        $teacherId = (new TeacherService)->getTeacherFromSession()["id"];
-                        $allTests = (new TestService)->getTestsByTeacherId($teacherId);
-
-                        // TODO: cssko resp. ulozte si to uz ako uznate za vhodne kto to mate na starosti
-                        // v a hrefe je to len provizorne ze aha funguje to 
-                        // cez $test mas pristup k vsetmu z test_template
-                        foreach ($allTests as $test){
-                            echo "<p><a href = 'test/detail.php?test={$test['code']}'>{$test['name']} STATUS: {$test['status']}</a><p>";
-                        }
-                    */
-                    ?>
-                    <h2 style="text-align: center;">Testy</h2>
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-8" id="testViewTests">
+                                <h2 style="text-align: center;">Testy</h2>
                                 <!--Toto menu povodne bolo medzi 'container' a 'row'-->
                                 <div class="row view_test_opt_menu">
                                     <div class="view_test_opt" onclick="viewMenuOption(this)" id="opt1_view1">Aktívne</div>
@@ -102,23 +84,25 @@ if(isset($_SESSION['logged_as'])){
                                 </div>
 
                                 <div id="opt_view_content1" style="display:block;">
-                                    <strong>Aktívne testy</strong><br>
+                                    <strong>Aktívne testy</strong>
                                     <?php
                                     $teacherId = (new TeacherService)->getTeacherFromSession()["id"];
                                     $allTests = (new TestService)->getTestsByTeacherId($teacherId);
                                     $tmp = 0;
+                                    echo "<ul>";
                                     foreach ($allTests as $test){
                                         if(!strcmp($test['status'], "1")){ //0 if equal
-                                            echo "<a href = 'test/detail.php?test={$test['code']}'>Test(".$test['code']."): {$test['name']}</a><br>";
+                                            echo "<li><a href = 'test/detail.php?test={$test['code']}'>Test(".$test['code']."): {$test['name']}</a></li>";
                                             $tmp=1;
                                         }
                                     }
+                                    echo "</ul>";
                                     if(!$tmp) echo "Žiadne testy";
                                     ?>
 
                                 </div>
                                 <div id="opt_view_content2" style="display:none;">
-                                    <strong>Neaktívne testy</strong><br>
+                                    <strong>Neaktívne testy</strong>
                                     <?php
                                     $teacherId = (new TeacherService)->getTeacherFromSession()["id"];
                                     $allTests = (new TestService)->getTestsByTeacherId($teacherId);
