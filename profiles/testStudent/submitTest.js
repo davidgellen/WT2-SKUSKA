@@ -18,6 +18,9 @@ $('#endTest').click( function(e) {
     var testData = {
         testId: $("#testIdHead").text(),
         aisId: $("#aisId").text(),
+        
+        
+        
     };
     
     //prida do testData odpovede na otazky S KRATKOU ODPOVEDOU
@@ -28,6 +31,11 @@ $('#endTest').click( function(e) {
     for (let key in mathAnswers){
         testData[key] = mathAnswers[key];
     }
+
+    //odpovede z parovania
+    answersToSend.forEach(function (arrayItem) {
+        testData[arrayItem.id]=arrayItem.answers;
+    });
 
     e.preventDefault();
     $.ajax({

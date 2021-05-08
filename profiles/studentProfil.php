@@ -77,6 +77,10 @@ if(!isset($_SESSION['start_time'])){
     }
     $_SESSION['target_time'] = $_SESSION['start_time'] + $testDuration*60;
 }
+//premenne pre parovaciu cast
+$pairQuestionId=0;
+$pairArr=[];
+$questID=[];
 
 if ($_SESSION['start_time'] + $testDuration*60 < time()){
     header("Location: testStudent/endTest.php");
@@ -145,8 +149,30 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
                         // Zuzka
                         break;
                     case "pair":
-                        echo "<p>switch pair vetva</p><br>";
                         // Peter
+                        ?>
+
+                            <ul style="float: left;">
+                                <?php foreach($question->list1 as $item){
+                                    echo "<li>$item</li>";
+                                    }
+                                ?>
+                            
+                            </ul>
+                            <ul id="<?php echo $pairQuestionId;array_push($pairArr,$pairQuestionId);array_push($questID,$key); ?>" class="sortable" style="float: left;">
+                                <?php 
+
+                                $reorder=$question->list2;
+                                shuffle($reorder);
+                                
+                                foreach($reorder as $item){
+                                        echo "<li>$item</li>";
+                                    }
+                                ?>
+                            </ul>
+
+                        <?php
+                    	$pairQuestionId=$pairQuestionId+1;
                         break;
                     case "draw":
                         echo "<p>switch draw vetva</p><br>";
@@ -238,11 +264,37 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
             
             //$("#result").html(localStorage.getItem("index"));
         });
+        
     })
+    //Parovanie
+         $( function() {
+            $( ".sortable" ).sortable();
+            $( ".sortable" ).disableSelection();
+  		});
+        var obj = <?php echo json_encode($pairArr); ?>;
+        var obj2 = <?php echo json_encode($questID); ?>;
+        answersToSend=[];
+        var i=0;
+        while(obj[i]!=null){
+            var tmp=[];
+            var unlist=document.getElementById(obj[i]);
+            var j=0;
+            while(unlist.getElementsByTagName('li')[j]!=null){
+                //console.log(unlist.getElementsByTagName('li')[j].innerHTML);
+                tmp.push(unlist.getElementsByTagName('li')[j].innerHTML);
+                j++;
+            }
+            //var answerObj = {id:obj[i], answers:tmp};
+            answersToSend.push({id:obj2[i], answers:tmp});
+            i++;
+            
+        }
+        
 
     
 </script>
 <script src="testStudent/submitTest.js"></script>
 <?php include "../includes/mathQuestion/studentProfilMathPaths.php";?>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 </html>
