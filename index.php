@@ -126,8 +126,8 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
             <div id="login_asStudent">
                 <form action="index.php" method="post" id ="login_asStudentForm">
                     <div class="form-group">
-                        <label for="exam_code">Kód testu:</label> <?php //TODO: Po spravnom overeni zmazat ?>
-                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" name="code" required> <?php //TODO: name='exam_code' nebude, bude sa overovat ci existuje cez ajax alebo normalne novu stranku ?>
+                        <label for="exam_code">Kód testu:</label>
+                        <input type="text" class="form-control" id="exam_code" placeholder="Kód" name="code" required>
                     </div>
                     <div id="additional_login" style="display: none;">
                         <div class="form-group">
@@ -163,7 +163,7 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
         </div>
     </article>
 </div>
-<script>     
+<script>
 
     // cast som presunul do scripts/login/checkTestCode.js kvoli doc.ready
 

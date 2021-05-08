@@ -16,6 +16,7 @@ hr.style-eight {
 
 #profile_menu{
     height: 90%;
+    padding: 0 20%;
 }
 
 .menu_opt{
@@ -23,10 +24,12 @@ hr.style-eight {
     background: linear-gradient(133deg, rgba(29,203,253,1) 50%, rgba(252,176,69,1) 100%);
     cursor: pointer;
     padding: 0.5em 0;
-    margin: 0.5em 2em;
+    margin: 0.5em 0;
     border-radius: 0.5em;
     border: 3px solid #16caca;
     transition: 0.1s;
+    min-width: 4em;
+    max-widrh: 6em;
 }
 
 .menu_opt:hover{
@@ -61,6 +64,7 @@ hr.style-eight {
     background: #d00d68;
     color: white;
     padding: 0.5em;
+    min-width: 5.2em;
 }
 
 .view_test_opt:hover{
@@ -81,21 +85,101 @@ hr.style-eight {
     border: 1px dotted black;
     border-radius: 3px;
     background-color: rgba(163,209,255,0.35);
+    height: 100%;
 }
 
 a:link, a:visited {
-    color: #141da4;
     text-decoration: none;
 }
 
 a:link:active, a:visited:active, a:hover {
-    color: #ffffff;
+    color: white;
 }
 
 h2{
     padding-bottom: 1.5em;
 }
 
+.btnDetail {
+    box-shadow:inset 0 0 15px 3px #446fb8;
+    background:linear-gradient(to bottom, #7c91b3 5%, #355491 100%);
+    background-color:#7c91b3;
+    border-radius:3px;
+    border:1px solid #1f2f47;
+    display:inline-block;
+    cursor:pointer;
+    color: white;
+    font-size:15px;
+    padding:6px 13px;
+    text-decoration:none;
+    text-shadow:0 1px 0 #a6acbd;
+    min-width: 5em;
+}
+.btnDetail:hover {
+    background:linear-gradient(to bottom, #729bec 5%, #7c91b3 100%);
+    background-color: #6489d2;
+    text-decoration: none;
+    color: white;
+}
+.btnDetail:active {
+    position:relative;
+    top:1px;
+    text-decoration: none;
+}
+
+.btnActivation {
+    box-shadow:inset 0px 1px 0px 0px #9fc1e0;
+    background:linear-gradient(to bottom, #4597e8 5%, #8378d6 100%);
+    background-color:#4597e8;
+    border-radius:6px;
+    border:1px solid #0a85ff;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #1e77d1;
+}
+.btnActivation:hover {
+    background:linear-gradient(to bottom, #8378d6 5%, #4597e8 100%);
+    background-color:#8378d6;
+}
+.btnActivation:active {
+    position:relative;
+    top:1px;
+}
+
+hr.divider{
+    overflow: visible;
+    border: none;
+    border-top: medium double #000000;
+    text-align: center;
+}
+
+h4{
+    text-align: center;
+}
+
+.listQuestions {
+    text-align: left;
+}
+
+.question {
+    padding: 0.5em;
+    border: 1px solid black;
+    margin: 1em;
+    background: white;
+}
+
+.questionWindows {
+    border: 2px solid #527cff;
+    border-radius: 3px;
+    padding: 0.3em;
+    margin: 0 10px 10px 0;
+}
+
 .debug{ /*TODO: Potom zmazať*/
-    border: 3px dotted black;
+    /*border: 3px dotted black;*/
 }

@@ -7,29 +7,29 @@ $( document ).ready(function() {
     $("#activateTest").click(function(e){
         e.preventDefault();
         let code = $("#codeValue").html();
-        $.ajax({ 
+        $.ajax({
             url: '../../scripts/test/activateTest.php',
             type: 'post',
             data: {code: code},
             success: function(){
-                $("#statusValue").html("1");
+                $("#statusValue").html("Aktívny ⬢");
             }
         });
-        
+
     })
 
     $("#deactivateTest").click(function(e){
         e.preventDefault();
         let code = $("#codeValue").html();
-        $.ajax({ 
+        $.ajax({
             url: '../../scripts/test/deactivateTest.php',
             type: 'post',
             data: {code: code},
             success: function(){
-                $("#statusValue").html("0");
+                $("#statusValue").html("Neaktívny ⬡");
             }
         });
-        
+
     })
 
 });
