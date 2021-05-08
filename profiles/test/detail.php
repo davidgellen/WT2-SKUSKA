@@ -28,11 +28,9 @@ $_SESSION["test"] = $testInfo;
     <link rel="stylesheet" href="../../styles/styleBody.css">
     <link rel="stylesheet" href="../../styles/teacherProfile.css">
 </head>
-<body>
-
-    <button onclick="window.location.href='../teacherProfil.php'">Home</button>
-
-
+<body class="d-flex flex-column min-vh-100" style="padding: 3em 3em 0 3em;">
+<div class="wrapper flex-grow-1 center-content" id="betterWidth">
+    <button onclick="location.href = '../../profiles/teacherProfil.php';" class="btnDetail" style="float: right">Naspäť</button>
     <div class="row">
         <div class="col-sm-4" style="text-align: left;">
             <?php
@@ -121,11 +119,6 @@ $_SESSION["test"] = $testInfo;
     ?>
         </div>
     </div>
-    
-    
-</body>
-</html>
-
 </div>
 <?php
 function formatQuestionType($type){
