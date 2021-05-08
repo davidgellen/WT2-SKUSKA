@@ -20,6 +20,7 @@
         require_once "../../database/TestService.php";
         require_once "../../database/TeacherService.php";
         require_once "../../database/QuestionService.php";
+        require_once "../../database/TestRecordService.php";
     ?>   
 
     <button onclick="location.href = '../../profiles/teacherProfil.php';" >Home</button><br>
@@ -80,6 +81,20 @@
 
     <h2>zoznam studentov, co ten test zacali robit</h2>
     <p>kliknutim na nich sa presmerujeme na stranku, kde je test ktory ziak vyplnil, teda ak ho odovzdal<p>
+
+    <?php
+        $students = @(new TestRecordService)->getStudentsStarted($testInfo["code"]);
+        foreach ($students as $student){
+            echo  $student["ais_id"] . " " . $student["name"] . " " . $student["surname"] . "<br>";
+            ?>
+                <form action = "../testStudent/submittedTest.php" method = "post">
+                    <input type = "hidden" name = "ais_id" value = "<?php echo $student["ais_id"];  ?>">
+                    <input type = "submit" value = "Hodnotenie">
+                </form>
+            <?php // cez bootstrap sa to bude dat aj vedla seba :)
+        }
+        
+    ?>
     
 </body>
 </html>
