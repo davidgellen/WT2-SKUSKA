@@ -30,6 +30,9 @@ $_SESSION["test"] = $testInfo;
 </head>
 <body>
 
+    <button onclick="window.location.href='../teacherProfil.php'">Home</button>
+
+
     <div class="row">
         <div class="col-sm-4" style="text-align: left;">
             <?php
@@ -111,6 +114,8 @@ $_SESSION["test"] = $testInfo;
                             <input type = "submit" value = "Hodnotenie">
                         </form>
             <?php // cez bootstrap sa to bude dat aj vedla seba :)
+            // ak by form robil problem tak to len redirectni cez href, do query daj ais_id
+            // a v submittedTest.php zmen $_POST["ais_id"]
         }
         
     ?>
