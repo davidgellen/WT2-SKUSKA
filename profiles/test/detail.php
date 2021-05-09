@@ -130,7 +130,7 @@ function formatQuestionType($type){
         case "math":
             return "Matematika";
         case "multi":
-            return "Multi uz ani neviem co to mam robit";
+            return "Viacej správnych odpovedí";
         case "draw":
             return "Kreslenie";
         default:

@@ -14,6 +14,7 @@ var_dump($_SESSION['test']);
     $type = "short";
     $path = '../../testTemplatesJSON/test' . $_SESSION['test']['id'] . '.json';
 
+    if($question!=null && $question!="" && $points!=null && $answer!=null && $answer!=""){
     $questionId = (new QuestionService)->createQuestion($_SESSION['test']['id'], $type, $path, $points);
 
     $data = ['type' => $type, 'question' => $question, 'correctAnswer' => $answer, 'points' => $points];
@@ -28,6 +29,7 @@ var_dump($_SESSION['test']);
     var_dump($content);
     fwrite($fp, json_encode($content));
     fclose($fp);
+    }
 
     header('Location: ../../profiles/test/detail.php?test='.$_SESSION['test']['code']);
 
