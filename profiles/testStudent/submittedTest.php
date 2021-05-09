@@ -27,12 +27,14 @@
 
         $templatePath = "../../testTemplatesJSON/test{$_SESSION["test"]["id"]}.json";
         $testTemplateFile = json_decode(file_get_contents($templatePath));
-
+        
         foreach ($testTemplateFile->questions as $key => $question){
-            echo $question->question . "({$question->type})<br>";
+            echo "qId: ".$key . " - ". $question->question . "({$question->type})<br>";
             switch ($question->type){
                 case "short":
-                    // Zuzka
+                    // Zuzka ?>
+                    <div><p>Odpoved: </p></div>
+                    <p><?=$testRecordFile->answers->$key?></p><br><?php
                     break;
                 case "multi":
                     echo "<p>switch multi vetva</p><br>";
