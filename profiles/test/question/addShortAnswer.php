@@ -11,10 +11,6 @@
 
 ?>
 
-ked vytvoris otazku tak po ulozeni asi redirect na detail naspat neviem
-
-lmao
-
 <form action=<?="../../../scripts/questions/createShortAnswer.php?test=" . $_SESSION["test"]["code"]?> id="shortAnswerForm" method="POST">
     <label for="questionText">Znenie otázky</label><br>
     <textarea id="questionText" name="questionText" cols="60" rows="5" form="shortAnswerForm"></textarea><br>
