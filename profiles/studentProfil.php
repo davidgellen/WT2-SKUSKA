@@ -77,6 +77,7 @@ if(!isset($_SESSION['start_time'])){
     }
     $_SESSION['target_time'] = $_SESSION['start_time'] + $testDuration*60;
 }
+
 //premenne pre parovaciu cast
 $pairQuestionId=0;
 $pairArr=[];
@@ -126,7 +127,7 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
         
         <a  href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a><br>
 
-        <div id="countdown"> <?= strval(date("i", $_SESSION['target_time']-time())) .":". strval(date("s", $_SESSION['target_time']-time())) ?> </div>
+        <div id="countdown"> <?= strval(date("G", $_SESSION['target_time']-time())) . ':' . strval(date("i", $_SESSION['target_time']-time())) .":". strval(date("s", $_SESSION['target_time']-time())) ?> </div>
         <?php
             
             echo '<h2>Test id: <span id = "testIdHead">'.$testId.'</span></h2>';
@@ -213,24 +214,28 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
         }
 
         //odratavanie casu
-        var timer2 = <?= strval(date("i", $_SESSION['target_time']-time())) ?> + ":" + <?= strval(date("s", $_SESSION['target_time']-time())) ?> ;
+        var timer2 = <?= strval(date("G", $_SESSION['target_time']-time())) ?> + ":" + <?= strval(date("i", $_SESSION['target_time']-time())) ?> + ":" + <?= strval(date("s", $_SESSION['target_time']-time())) ?> ;
         var interval = setInterval(function() {
         var timer = timer2.split(':');
         //by parsing integer, I avoid all extra string processing
-        var minutes = parseInt(timer[0], 10);
-        var seconds = parseInt(timer[1], 10);
+        var hours = parseInt(timer[0], 10);
+        var minutes = parseInt(timer[1], 10);
+        var seconds = parseInt(timer[2], 10);
         --seconds;
         minutes = (seconds < 0) ? --minutes : minutes;
+        hours = (minutes < 0) ? --hours : hours;
         if (minutes < 0) clearInterval(interval);
         seconds = (seconds < 0) ? 59 : seconds;
         seconds = (seconds < 10) ? '0' + seconds : seconds;
-        if(minutes < 4) $('#countdown').css('color', 'red');
-        if ((seconds <= 0) && (minutes <= 0)) {
+        minutes = (minutes < 0) ? 59 : minutes;
+        minutes = (minutes < 10) ? '0' + minutes : minutes;
+        if(minutes < 4 && hours == 0) $('#countdown').css('color', 'red');
+        if ((seconds <= 0) && (minutes <= 0) && (hours <= 0)) {
             clearInterval(interval);
             $('#endTest').click();
         }
-        $('#countdown').html(minutes + ':' + seconds);
-        timer2 = minutes + ':' + seconds;
+        $('#countdown').html(hours + ':' + minutes + ':' + seconds);
+        timer2 =hours + ':' + minutes + ':' + seconds;
         }, 1000);
 
 
