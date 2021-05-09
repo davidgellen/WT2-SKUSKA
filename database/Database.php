@@ -1,5 +1,5 @@
 <?php
-require_once( "/home/xmedzihradska/public_html/skuska/config/config.php");
+require_once "config.php";
 
 class Database{
 
