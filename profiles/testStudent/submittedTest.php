@@ -45,8 +45,10 @@
                     // Peter
                     break;
                 case "draw":
-                    echo "<p>switch draw vetva</p><br>";
-                    // Pato
+                    ?>
+                        <div><p>Odpoveď:</p></div>
+                        <div class="drawingOutput" data-qid = <?php echo "\"".$key."\""; ?>></div>
+                    <?php
                     break;
                 case "math":
                     // echo "<pre>";
@@ -85,6 +87,25 @@
                 }
             })
         });
+
+    $('.drawingOutput').each(function(index) {
+    fetch('../../testStudentsJSON/test'+ $('#testId').html() +'/'+ $('#aisId').html() +'.json')
+        .then(response => response.json())
+        .then(json => {
+            try{
+                let imagename = json["answers"][$(this).data("qid")];
+                let image = document.createElement("img");
+                image.src = "../../drawings/"+imagename;
+                image.alt = "Nakresleny obrazok";
+                image.width = "400";
+                image.height = "400";
+                $(this).empty();
+                $(this).append(image);
+            }
+            catch(error){ 
+            }
+        })
+    });
     
     </script>
 

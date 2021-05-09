@@ -7,6 +7,13 @@ window.addEventListener('storage', () => {
     mathAnswers[mathQid] = jsonToRender;
 });
 
+var drawingAnswers = new Object();
+window.addEventListener('storage', () => { 
+    let drawingQid = localStorage.getItem("drawingqid");
+    let drawingName = localStorage.getItem("drawingName");
+    drawingAnswers[drawingQid] = drawingName;
+});
+
 $('#endTest').click( function(e) {
     console.log("odovzdalo sa");
     console.log($("#countdown").text());
@@ -29,9 +36,17 @@ $('#endTest').click( function(e) {
     }
 
     for (let key in mathAnswers){
-        testData[key] = mathAnswers[key];
+        if(mathAnswers[key] != null){
+            testData[key] = mathAnswers[key];
+        }
     }
 
+    for (let j in drawingAnswers){
+        if(drawingAnswers[j] != null){
+            testData[j] = drawingAnswers[j];
+        }
+    }
+    
     //odpovede z parovania
     answersToSend.forEach(function (arrayItem) {
         testData[arrayItem.id]=arrayItem.answers;

@@ -175,8 +175,12 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
                     	$pairQuestionId=$pairQuestionId+1;
                         break;
                     case "draw":
-                        echo "<p>switch draw vetva</p><br>";
-                        // Pato
+                        ?>
+                            <button class = "drawRedirectBtn" data-qid = <?php echo "\"".$key."\""; ?> data-filename = <?php echo ''.$testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>>Nakresliť</button>
+                            <button class = "photoRedirectBtn" data-qid = <?php echo "\"".$key."\""; ?> data-filename = <?php echo ''.$testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>>Odfotiť</button>
+                            <div><p>Odpoved:</p></div>
+                            <div class="drawingOutput" data-qid = <?php echo "\"".$key."\""; ?> data-filename = <?php echo ''.$testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>></div>
+                        <?php
                         break;
                     case "math":
                         // echo "<pre>";
@@ -203,6 +207,10 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
 <?php include "../includes/footer.php";?>
 <script>
     $(document).ready(function(){
+        window.onload = function()
+        {
+            window.localStorage.clear();
+        }
 
         //odratavanie casu
         var timer2 = <?= strval(date("i", $_SESSION['target_time']-time())) ?> + ":" + <?= strval(date("s", $_SESSION['target_time']-time())) ?> ;
@@ -264,7 +272,34 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
             
             //$("#result").html(localStorage.getItem("index"));
         });
-        
+                //drawings
+                $('.drawRedirectBtn').click(function(e){
+            window.open("testStudent/drawingEditor.php?qid="+$(this).data("qid")+"&filename="+$(this).data("filename"), '_blank').focus();
+        })
+        $('.photoRedirectBtn').click(function(e){
+            window.open("testStudent/qrcode.php?qid="+$(this).data("qid")+"&filename="+$(this).data("filename"), '_blank').focus();
+        })
+
+        window.addEventListener('storage', () => {
+            let drawingQid = localStorage.getItem("drawingqid");
+            let drawingName = "../drawings/"+localStorage.getItem("drawingName");
+            let drawingOutput = $(".drawingOutput");
+            drawingOutput.each(function(index){
+                if ($(this).data("qid") ==  parseInt(drawingQid)){
+                    let image = document.createElement("img");
+                    image.src = drawingName;
+                    image.alt = "Nakresleny obrazok";
+                    image.width = "200";
+                    image.height = "200";
+                    $(this).empty();
+                    $(this).append(image);
+                    window.localStorage.clear();
+                }
+            })
+            
+            //$("#result").html(localStorage.getItem("index"));
+        });
+
     })
     //Parovanie
          $( function() {
