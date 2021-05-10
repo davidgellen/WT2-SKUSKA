@@ -252,7 +252,7 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
             clearInterval(interval);
             $('#endTest').click();
         }
-        $('#countdown').html(hours + ':' + minutes + ':' + seconds);
+        $('#countdown').html("<h3>"+hours + ':' + minutes + ':' + seconds+"</h3>");
         timer2 =hours + ':' + minutes + ':' + seconds;
         }, 1000);
 
