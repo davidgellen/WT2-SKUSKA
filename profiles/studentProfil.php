@@ -132,7 +132,7 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
 
 
         <?php
-            // echo '<h2>Test id: <span id = "testIdHead">'.$testId.'</span></h2>';
+            echo '<h2 hidden>Test id: <span id = "testIdHead">'.$testId.'</span></h2>';
             $tmp = 1;
             foreach ($questions as $key => $question){
                 echo "<div class='testContent'>";
