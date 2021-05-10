@@ -26,11 +26,6 @@ var_dump($_SESSION['test']);
     $allQuestions = $content['questions'];
     $allQuestions[$questionId] = $data;
     $content['questions'] = $allQuestions;
-
-    $pointsRecieved = $content['pointsRecieved'];
-    $pointsRecieved[$questionId] = "0";
-    $content['pointsRecieved'] = $pointsRecieved;
-
     var_dump($content);
     fwrite($fp, json_encode($content));
     fclose($fp);

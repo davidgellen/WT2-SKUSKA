@@ -24,9 +24,12 @@ if(isset($_POST)){
     $content = json_decode($decoded, true);
     $allAnswers = $content['answers'];
 
+    $content["pointsRecieved"] = array();
+
     foreach($_POST as $key => $value){
         if(strcmp($key, "testId")==0 || strcmp($key, 'aisId')==0) continue;
         $allAnswers[$key] = $value;
+        $content["pointsRecieved"][$key] = "0";
     }
 
     $content['answers'] = $allAnswers;

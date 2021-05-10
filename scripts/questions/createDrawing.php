@@ -19,12 +19,7 @@
     $content = json_decode($decoded, true);
     $allQuestions = $content['questions'];
     $allQuestions[$questionId] = $data;
-    $content['questions'] = $allQuestions;
-
-    $pointsRecieved = $content['pointsRecieved'];
-    $pointsRecieved[$questionId] = "0";
-    $content['pointsRecieved'] = $pointsRecieved;
-    
+    $content['questions'] = $allQuestions;    
     var_dump($content);
     fwrite($fp, json_encode($content));
     fclose($fp);

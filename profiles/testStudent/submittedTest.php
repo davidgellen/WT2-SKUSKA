@@ -27,6 +27,8 @@
 
         $templatePath = "../../testTemplatesJSON/test{$_SESSION["test"]["id"]}.json";
         $testTemplateFile = json_decode(file_get_contents($templatePath));
+
+        $pointsRecieved = $testRecordFile->pointsRecieved;
         
         foreach ($testTemplateFile->questions as $key => $question){
             echo "qId: ".$key . " - ". $question->question . "({$question->type})<br>";
@@ -46,6 +48,7 @@
                 case "pair":
                     // Peter
                     ?>
+                    <br>
                             <div class="row">
                                 <ul style="float: left;">
                                     <?php foreach($question->list1 as $item){
@@ -65,7 +68,7 @@
                                     ?>
                                 </ul>
                             </div>
-
+                            
                         <?php
                     break;
                 case "draw":
@@ -75,9 +78,6 @@
                     <?php
                     break;
                 case "math":
-                    // echo "<pre>";
-                    // var_dump($question->equationJsonString);
-                    // echo "</pre>";
                     ?>
                         <?php //tu sa nacita rovnica ktoru zadal ucitel ?>
                         <div><p>Odpoved:</p></div>
@@ -86,7 +86,12 @@
                     break;
                 default:
                     break;
-            }
+            }?>
+            <br>
+            <?php
+            echo "hodnotenie: " . $pointsRecieved->$key . "<br>";
+            
+            
             echo "----------------------<br>";
         }
 
