@@ -25,6 +25,11 @@ require_once "../../database/QuestionService.php";
         $allQuestions = $content['questions'];
         $allQuestions[$questionId] = $data;
         $content['questions'] = $allQuestions;
+
+        $pointsRecieved = $content['pointsRecieved'];
+        $pointsRecieved[$questionId] = "0";
+        $content['pointsRecieved'] = $pointsRecieved;
+        
         fwrite($fp, json_encode($content));
         fclose($fp);
     }
