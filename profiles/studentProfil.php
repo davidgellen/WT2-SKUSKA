@@ -96,9 +96,8 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
     crossorigin="anonymous"></script>
     <?php include "../includes/header.php" ?>
     <link rel="stylesheet" href="../styles/styleBody.css">
-    <link rel="stylesheet" href="../styles/about.css">
+    <link rel="stylesheet" href="../styles/studentProfile.css">
 </head>
-<body>
 <body class="d-flex flex-column min-vh-100">
 <div class="wrapper flex-grow-1 center-content" id="betterWidth">
     <header>
@@ -115,72 +114,84 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
                     </li>
                 </ul>
                 <form action="studentProfil.php" method="post" class="form-inline my-2 my-lg-0">
-                    <input type='submit' name='logout' value='Odhlásiť sa'>
+                    <input type='submit' name='logout' value='Odhlásiť sa' class="btn1">
                 </form>
             </div>
         </nav>
     </header>
-    <article>
-        <p>Prihlaseny: <span id="name"><?=$_SESSION['name']?> </span><span id="surname"><?=$_SESSION['surname']?> </span></p>
-        <p>ID: <span id="aisId"><?=$_SESSION['ais_id']?></span></p>
-        <h1>Tu si daj text jaky ces</h1>
-        
-        <a  href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a><br>
+    <!-- <a href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a><br>  //TODO: Nefunkcne ak je v teste student - treba dokoncit, popr vymazat a nechat tlacitko Odhlasit sa-->
+    <section id="exam"> <!-- TODO: export pdf/csv -->
+        <div style="float: right;">
+            <p>Prihlásený: <span id="name"><?=$_SESSION['name']?> </span><span id="surname"><?=$_SESSION['surname']?> </span><br>
+            ID: <span id="aisId"><?=$_SESSION['ais_id']?></span></p>
+        </div>
 
-        <div id="countdown"> <?= strval(date("G", $_SESSION['target_time']-time())) . ':' . strval(date("i", $_SESSION['target_time']-time())) .":". strval(date("s", $_SESSION['target_time']-time())) ?> </div>
+        <div style="text-align: center; margin-bottom: 5em;">
+            Zostávajúci čas na dokončenie: <div id="countdown"><h3><?= strval(date("G", $_SESSION['target_time']-time())) . ':' . strval(date("i", $_SESSION['target_time']-time())) .":". strval(date("s", $_SESSION['target_time']-time())) ?></h3> </div>
+        </div>
+
+
         <?php
-            
-            echo '<h2>Test id: <span id = "testIdHead">'.$testId.'</span></h2>';
+            // echo '<h2>Test id: <span id = "testIdHead">'.$testId.'</span></h2>';
+            $tmp = 1;
             foreach ($questions as $key => $question){
-                echo "<p>";
-                echo "questionID: " . $key . "<br>";
-                echo "Typ: " . $question->type . "<br>";
+                echo "<div class='testContent'>";
+                echo "<div class='questionHead'>";
+                echo "<div class='questionOrder'>" .$tmp."</div>";
+                $tmp++;
+                echo "<div style='padding: 0.5em 1.5em;'>";
+                //echo "questionID: " . $key . "<br>";
+                echo "<i>Typ otázky: " . $question->type . "</i><br>";
                 echo "<span class = 'font-weight-bold'>Zadanie: </span>" . $question->question . "<br>";
-                echo "</p>";
+                echo "</div></div>";
                 // tuna sa dava ako sa zobrazi otazka a jak ju bude vyplnat student
                 // ak je kodu vela dajte do ineho suboru a potom len include("cesta k suboru")
                 // lebo sa v tom ani jurko nevyzna
+                echo "<div class='questionBody'>";
                 switch ($question->type){
                     case "short":
+                        echo "Odpoveď: <br>";
                         echo "<input type='text' class='questionShort' id='". $key . "'><br>";
                         // Zuzka
                         break;
                     case "multi":
-                        echo "<p>switch multi vetva</p><br>";
+                        echo "<p>switch multi vetva</p><br>"; //TODO: multi answer
                         // Zuzka
                         break;
                     case "pair":
                         // Peter
                         ?>
-
-                            <ul style="float: left;">
-                                <?php foreach($question->list1 as $item){
-                                    echo "<li>$item</li>";
-                                    }
-                                ?>
-                            
-                            </ul>
-                            <ul id="<?php echo $pairQuestionId;array_push($pairArr,$pairQuestionId);array_push($questID,$key); ?>" class="sortable" style="float: left;">
-                                <?php 
-
-                                $reorder=$question->list2;
-                                shuffle($reorder);
-                                
-                                foreach($reorder as $item){
+                        <?php echo "<p>Zotrieď:</p>"?>
+                            <div class="row">
+                                <ul style="float: left;">
+                                    <?php foreach($question->list1 as $item){
                                         echo "<li>$item</li>";
-                                    }
-                                ?>
-                            </ul>
+                                        }
+                                    ?>
+
+                                </ul>
+                                <ul id="<?php echo $pairQuestionId;array_push($pairArr,$pairQuestionId);array_push($questID,$key); ?>" class="sortable" style="float: left; cursor: pointer;">
+                                    <?php
+
+                                    $reorder=$question->list2;
+                                    shuffle($reorder);
+
+                                    foreach($reorder as $item){
+                                            echo "<li>$item</li>";
+                                        }
+                                    ?>
+                                </ul>
+                            </div>
 
                         <?php
                     	$pairQuestionId=$pairQuestionId+1;
                         break;
                     case "draw":
                         ?>
-                            <button class = "drawRedirectBtn" data-qid = <?php echo "\"".$key."\""; ?> data-filename = <?php echo ''.$testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>>Nakresliť</button>
-                            <button class = "photoRedirectBtn" data-qid = <?php echo "\"".$key."\""; ?> data-filename = <?php echo ''.$testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>>Odfotiť</button>
-                            <div><p>Odpoved:</p></div>
-                            <div class="drawingOutput" data-qid = <?php echo "\"".$key."\""; ?> data-filename = <?php echo ''.$testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>></div>
+                            <button class = "drawRedirectBtn btnActivation" data-qid = <?php echo "\"".$key."\""; ?> data-filename = <?php echo ''.$testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>>Nakresliť</button>
+                            <button class = "photoRedirectBtn btnActivation" data-qid = <?php echo "\"".$key."\""; ?> data-filename = <?php echo ''.$testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>>Odfotiť</button>
+                            <div><p>Odpoveď:</p></div>
+                            <div class="drawingOutput" data-qid = "<?php echo $key; ?>" data-filename = <?php echo $testId.'_'.$_SESSION['ais_id'].'_'.$key.'.jpg';?>></div> <!-- Ak by nieco neslo, menil som len uvodzovky kvoli html chybam-->
                         <?php
                         break;
                     case "math":
@@ -190,20 +201,20 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
                         ?>
                             <?php //tu sa nacita rovnica ktoru zadal ucitel ?>
                             <div class="renderedEq" data-qid = <?php echo "\"".$key."\""; ?>></div>
-                            <button class = "mathRedirectBtn" data-qid = <?php echo "\"".$key."\""; ?>>Vypln</button>
-                            <div><p>Odpoved:</p></div>
+                            <button class = "mathRedirectBtn btnActivation" data-qid = <?php echo "\"".$key."\""; ?>>Vytvoriť rovnicu</button>
+                            <div><p>Odpoveď:</p></div>
                             <div class="renderedEqInput" data-qid = <?php echo "\"".$key."\""; ?>></div>
                         <?php
                         break;
                     default:
                         break;
                 }
-                echo "----------------------<br>";
+                echo "</div>";
+                echo "</div>";
             }
-
         ?>
-        <input type="button" id="endTest" name="endTest" value="Odovzdať">
-    </article>
+        <input type="button" id="endTest" name="endTest" value="Odovzdať" class="btn1 finishTest">
+    </section>
 </div>
 <?php include "../includes/footer.php";?>
 <script>

@@ -67,7 +67,7 @@ if(isset($_SESSION['logged_as'])){
                 <div id="profile_menu">
                     <?php //TODO: Menu s roznymi polozkami(zobrazenie testov, pridanie testov,...) - musi byt rovnaky pocet ako v kontextovom okne ?>
                     <div class="menu_opt" onclick="menuOption(this)" id="opt1">Prehľad testov</div>
-                    <div class="menu_opt" onclick="menuOption(this)" id="opt2">Vytvor test</div>
+                    <div class="menu_opt" onclick="menuOption(this)" id="opt2">Vytvorenie testu</div>
                 </div>
             </div>
             <div class="col-sm-9 debug" id="content">
@@ -130,14 +130,14 @@ if(isset($_SESSION['logged_as'])){
                 </div>
 
                 <div id="opt2_content" style="display: none;">
-                    <h2>Vytvor nový test</h2>
+                    <h2>Vytvorenie nového testu</h2>
                     <div id = "queuedQuestions">
                         <form id = "createTestForm" method = "post" action = "../scripts/test/createTest.php">
-                            <label for="testName">Meno testu:</label><br>
-                            <input type="text" id="testName" name="testName"><br>
-                            <label for="testDuration">Dlžka testu: </label><br>
-                            <input type="number" id="testDuration" name="testDuration"><br>
-                            <input type="submit" id ="createTestSubmit" value = "Vytvor Test">
+                            <label for="testName">Názov testu:</label><br>
+                            <input type="text" id="testName" name="testName" required><br><br>
+                            <label for="testDuration">Dĺžka testu: </label><br>
+                            <input type="number" id="testDuration" name="testDuration" required><br><br>
+                            <input type="submit" id ="createTestSubmit" value = "Vytvoriť nový test" class="btnActivation">
                         </form>
                     </div>
                 </div>

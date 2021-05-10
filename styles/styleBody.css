@@ -18,11 +18,11 @@ article {
 }
 
 footer {
-    bottom: 0;
+    /*bottom: 0;
     width: 100%;
     text-align: center;
     padding: 1em 0em;
-    background-color: white;
+    background-color: white;*/
 }
 
 #login_form {
