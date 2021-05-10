@@ -52,12 +52,6 @@ if(!isset($_SESSION['start_time'])){
         $testStudentRecord = (new StudentTestService)->getRecord($testId, $studentId);
 
         //ID otazok z test templatu
-        // $fpQuestions = fopen('../testTemplatesJSON/test'.$testId.'.json', 'r+');
-        // $contentObject = file_get_contents('../testTemplatesJSON/test'.$testId.'.json');
-        // $contentObject = json_encode($contentObject);
-        // $decoded = json_decode($contentObject, true);
-        // $content = json_decode($decoded, true);
-        // $allQuestions = $content['questions'];
         $qIds = array();
         foreach($questions as $qKey => $qValue){
             $qIds[$qKey] = array();
@@ -83,6 +77,7 @@ $pairQuestionId=0;
 $pairArr=[];
 $questID=[];
 
+//ak uz cas vyprsal, student sa uz na test nemoze prihlasit
 if ($_SESSION['start_time'] + $testDuration*60 < time()){
     header("Location: testStudent/endTest.php");
 }
@@ -146,7 +141,19 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
                         // Zuzka
                         break;
                     case "multi":
-                        echo "<p>switch multi vetva</p><br>";
+                        $correct = array();
+                        $wrong = array();
+                        if($question->correctAnswers != null)    $correct = $question->correctAnswers;
+                        if($question->wrongAnswers != null)    $wrong = $question->wrongAnswers;
+                        $allAnswers = array_merge($correct, $wrong);
+                        shuffle($allAnswers); ?>
+                        <div class='multiAnswer' id=<?=$key?>> <?php
+                        foreach($allAnswers as $a){ 
+                            echo "<input class=" . $key . " type='checkbox' value=".$a.">
+                            <label>".$a."</label> <br>";
+                        } ?>
+                        </div> <?php
+
                         // Zuzka
                         break;
                     case "pair":
@@ -237,7 +244,6 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
         $('#countdown').html(hours + ':' + minutes + ':' + seconds);
         timer2 =hours + ':' + minutes + ':' + seconds;
         }, 1000);
-
 
 
         $('.renderedEq').each(function(index) {
