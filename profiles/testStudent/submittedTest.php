@@ -41,8 +41,29 @@
                     // Zuzka
                     break;
                 case "pair":
-                    echo "<p>switch pair vetva</p><br>";
                     // Peter
+                    ?>
+                            <div class="row">
+                                <ul style="float: left;">
+                                    <?php foreach($question->list1 as $item){
+                                        echo "<li>$item</li>";
+                                        }
+                                    ?>
+
+                                </ul>
+                                <ul style="float: left;">
+                                    <?php
+
+                                    $testRecordFile->answers->$key;
+
+                                    foreach($testRecordFile->answers->$key as $item){
+                                            echo "<li>$item</li>";
+                                        }
+                                    ?>
+                                </ul>
+                            </div>
+
+                        <?php
                     break;
                 case "draw":
                     ?>

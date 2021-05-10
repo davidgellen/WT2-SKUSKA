@@ -170,7 +170,7 @@ h4{
     padding: 0.5em;
     border: 1px solid black;
     margin: 1em;
-    background: white;
+    background: #e5e5e5;;
 }
 
 .questionWindows {
@@ -178,6 +178,17 @@ h4{
     border-radius: 3px;
     padding: 0.3em;
     margin: 0 10px 10px 0;
+}
+
+.listStudent{
+    border: 1px solid black;
+    border-radius: 10px;
+    min-width: 20em;
+    max-width: 25em;
+    padding: 0.5em;
+    background-color: #e5e5e5;
+    min-height: 9em;
+    margin-bottom: 1em;
 }
 
 .debug{ /*TODO: Potom zmazať*/

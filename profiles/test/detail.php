@@ -100,23 +100,23 @@ $_SESSION["test"] = $testInfo;
         </div>
         <div class="col-sm-5">
             <h2>Zoznam študentov prihlásených na test</h2>
-            <p>kliknutim na nich sa presmerujeme na stranku, kde je test ktory ziak vyplnil, teda ak ho odovzdal<p>
-                <!-- TODO: Spravit vypis studentov-->
+            <p>Kliknutím na hodnotenie sa zobrazí test študenta<p>
                 <?php
                 $students = @(new TestRecordService)->getStudentsStarted($testInfo["code"]);
                 foreach ($students as $student){
-                    echo  $student["ais_id"] . " " . $student["name"] . " " . $student["surname"] . "<br>";
+                    echo "<div class='listStudent'>";
+                    echo  "<strong>ID:</strong> " . $student["ais_id"] . "<br><strong>Meno:</strong> " . $student["name"] . " <strong>Priezvisko:</strong> " . $student["surname"] . "<br>";
+                    // ak by form robil problem tak to len redirectni cez href, do query daj ais_id
+                    // a v submittedTest.php zmen $_POST["ais_id"]
                     ?>
                         <form action = "../testStudent/submittedTest.php" method = "post">
-                            <input type = "hidden" name = "ais_id" value = "<?php echo $student["ais_id"];  ?>">
-                            <input type = "submit" value = "Hodnotenie">
+                            <input type = "hidden" name = "ais_id" value = "<?php echo $student["ais_id"];  ?>"><br>
+                            <input type = "submit" value = "Hodnotenie" class="btnActivation" style="float: right;">
                         </form>
-            <?php // cez bootstrap sa to bude dat aj vedla seba :)
-            // ak by form robil problem tak to len redirectni cez href, do query daj ais_id
-            // a v submittedTest.php zmen $_POST["ais_id"]
-        }
-        
-    ?>
+            <?php
+                    echo "</div>";
+                }
+            ?>
         </div>
     </div>
 </div>
