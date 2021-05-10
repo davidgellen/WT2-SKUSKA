@@ -36,8 +36,11 @@
                     <div><p>Odpoved: </p></div>
                     <p><?=$testRecordFile->answers->$key?></p><br><?php
                     break;
-                case "multi":
-                    echo "<p>switch multi vetva</p><br>";
+                case "multi": ?>
+                    <div><p>Vybrané odpovede: </p></div><?php
+                    for($i = 0; $i<count($testRecordFile->answers->$key); $i++){
+                        echo "<p>".$testRecordFile->answers->$key[$i]."</p>";
+                    };
                     // Zuzka
                     break;
                 case "pair":
