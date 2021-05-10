@@ -146,11 +146,18 @@ if(isset($_POST)){
             case "short":
                 if(strtolower(removeAccents($studentAnswer)) == strtolower(removeAccents($question->correctAnswer))){
                     $content["pointsRecieved"][$qid] = $question->points;
-                    $content["pointsRecieved"]["total"] = intval($content["pointsRecieved"]["total"]) + intval($question->points);
+                    $content["pointsRecieved"]["total"] = intval($content["pointsRecieved"]["total"]) + intval($content["pointsRecieved"][$qid]);
                 }
                 break;
             case "multi":
-                //eval
+                $numOfCorrectAnswers = 0;
+                for($i = 0; $i<count($question->correctAnswers); $i++){
+                    if(in_array($question->correctAnswers[$i], $studentAnswer)){
+                        $numOfCorrectAnswers++;
+                    }
+                }
+                $content["pointsRecieved"][$qid] = floor(($question->points * ($numOfCorrectAnswers/count($question->correctAnswers)))*100)/100;
+                $content["pointsRecieved"]["total"] = doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]);
                 break;
             case "pair":
                 //eval
