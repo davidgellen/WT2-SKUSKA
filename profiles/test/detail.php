@@ -104,14 +104,20 @@ $_SESSION["test"] = $testInfo;
                 <?php
                 $students = @(new TestRecordService)->getStudentsStarted($testInfo["code"]);
                 foreach ($students as $student){
+                    if($student['active']==1){
+                        $state="Vypĺňa test";
+                    }
+                    else{
+                        $state="Odovzdal";
+                    }
                     echo "<div class='listStudent'>";
-                    echo  "<strong>ID:</strong> " . $student["ais_id"] . "<br><strong>Meno:</strong> " . $student["name"] . " <strong>Priezvisko:</strong> " . $student["surname"] . "<br>";
+                    echo  "<strong>ID:</strong> " . $student["ais_id"] . "<br><strong>Meno:</strong> " . $student["name"] . " <strong>Priezvisko:</strong> " . $student["surname"] . "<br>" . "<strong>Stav: </strong> " .$state . "<br>";
                     // ak by form robil problem tak to len redirectni cez href, do query daj ais_id
                     // a v submittedTest.php zmen $_POST["ais_id"]
                     ?>
                         <form action = "../testStudent/submittedTest.php" method = "post">
                             <input type = "hidden" name = "ais_id" value = "<?php echo $student["ais_id"];  ?>"><br>
-                            <input type = "submit" value = "Hodnotenie" class="btnActivation" style="float: right;">
+                            <?php if($student['active']==0){echo '<input type = "submit" value = "Hodnotenie" class="btnActivation" style="float: right;">';} ?>
                         </form>
             <?php
                     echo "</div>";

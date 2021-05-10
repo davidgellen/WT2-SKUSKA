@@ -10,7 +10,7 @@
             try {
                 $this->conn = (new Database())->getConnection();
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = $this->conn->prepare("SELECT student.name, student.surname, student.ais_id FROM test_record JOIN student ON test_record.student_id = student.id 
+                $stmt = $this->conn->prepare("SELECT student.name, student.surname, student.ais_id, test_record.active FROM test_record JOIN student ON test_record.student_id = student.id 
                 JOIN test_template on test_record.template_id = test_template.id WHERE test_template.code = :test_code");
                 $stmt->bindParam("test_code", $test_code);
                 $stmt->execute();
