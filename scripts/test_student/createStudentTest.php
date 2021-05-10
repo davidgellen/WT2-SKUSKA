@@ -32,6 +32,8 @@ if(isset($_POST)){
         $content["pointsRecieved"][$key] = "0";
     }
 
+    $content["pointsRecieved"]["total"] = "0";
+
     $content['answers'] = $allAnswers;
     var_dump($content);
     fwrite($fp, json_encode($content));

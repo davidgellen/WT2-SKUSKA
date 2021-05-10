@@ -89,16 +89,24 @@
             }?>
             <br>
             <?php
-            echo "hodnotenie: " . $pointsRecieved->$key . "<br>";
-            
-            
-            echo "----------------------<br>";
+                //echo "hodnotenie: " . $pointsRecieved->$key . "<br>";
+            ?>
+            <label for=<?php echo "points" . $key;?>>Hodnotenie:</label><br>
+            <?php $currentPointsRecieved = $pointsRecieved->$key; ?>
+            <input type="number" id=<?php echo "points" . $key;?> name=<?php echo "points" . $key;?> min="0" 
+                value = <?php echo $currentPointsRecieved;?> data-qid = <?php echo $key;?> class = "pointsInput">
+            <?php
+            echo "<br>----------------------<br>";
         }
+        echo "<p>spolu: <span id = 'pointTotal'>" . $pointsRecieved->total ."</span></p><br>";
 
     ?>
 
+    <button id = "evaluateQuestionsButton">Hodnot</button>
+
     <script>
 
+    $( document ).ready(function() {
     $('.renderedEq').each(function(index) {
         fetch('../../testStudentsJSON/test'+ $('#testId').html() +'/'+ $('#aisId').html() +'.json')
             .then(response => response.json())
@@ -112,10 +120,11 @@
                     equation.updateAll();
                 }
                 catch(error){ 
-                    console.log(error); // ani tu byt nemusi len to robi bordel vsade
+                    console.log(error); 
                 }
-            })
-        });
+                })
+            });
+    });
 
     $('.drawingOutput').each(function(index) {
     fetch('../../testStudentsJSON/test'+ $('#testId').html() +'/'+ $('#aisId').html() +'.json')
@@ -138,6 +147,8 @@
     
     </script>
 
+
 <?php include "../../includes/mathQuestion/insertMathPaths.php";?>
+<script src = "../../scripts/test_student/evaluateTest.js"></script>
 </body>
 </html>
