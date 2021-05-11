@@ -3,6 +3,13 @@
 require_once "../../database/StudentTestService.php";
 session_start(); 
 
+require_once "../../database/Database.php";
+try {
+    $conn = (new Database())->getConnection();
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
 function removeAccents($str) {
     $transliteration = array(
         'Ĳ' => 'I', 'Ö' => 'O','Œ' => 'O','Ü' => 'U','ä' => 'a','æ' => 'a',
@@ -164,6 +171,15 @@ if(isset($_POST)){
                 break;
         }
     }
+
+    $sql = "SELECT id FROM student WHERE ais_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$aisId]);
+    $studentID = $stmt->fetch(PDO::FETCH_NUM);
+
+    $sql = "UPDATE test_record SET points = ? WHERE student_id = ? AND template_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$content["pointsRecieved"]["total"], $studentID[0], $testId]);
 
     var_dump($content);
     fwrite($fp, json_encode($content));

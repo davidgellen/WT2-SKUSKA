@@ -99,6 +99,11 @@ $_SESSION["test"] = $testInfo;
 
         </div>
         <div class="col-sm-5">
+            <h2>Exportovanie výsledkov</h2>
+            <form action = "exportcsv.php" method = "get">
+                <input type = "submit" value = "Export do csv" class="btnActivation" style="float: right;">
+            </form>
+
             <h2>Zoznam študentov prihlásených na test</h2>
             <p>Kliknutím na hodnotenie sa zobrazí test študenta<p>
                 <?php
