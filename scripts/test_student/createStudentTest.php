@@ -146,7 +146,7 @@ if(isset($_POST)){
             case "short":
                 if(strtolower(removeAccents($studentAnswer)) == strtolower(removeAccents($question->correctAnswer))){
                     $content["pointsRecieved"][$qid] = $question->points;
-                    $content["pointsRecieved"]["total"] = doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]);
+                    $content["pointsRecieved"]["total"] = intval($content["pointsRecieved"]["total"]) + intval($content["pointsRecieved"][$qid]);
                 }
                 break;
             case "multi":
@@ -161,6 +161,25 @@ if(isset($_POST)){
                 break;
             case "pair":
                 //eval
+                
+                $index=0;
+                $points=0;
+                
+                $object=json_decode(json_encode($question),true);
+                $base=$object["points"];
+                foreach($question->list2 as $item){
+                    if($item==$studentAnswer[$index]){
+                        
+                        $points=$points+$base/count($studentAnswer);
+                       
+                    }
+                    $index++;
+
+                }
+
+                $content["pointsRecieved"][$qid] = strval(round($points,2));
+                $content["pointsRecieved"]["total"] = doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]);
+                
                 break;
         }
     }
