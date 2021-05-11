@@ -39,7 +39,7 @@
 </div>
 
 <label for="points">Bodovanie</label><br>
-<input type="number" id="points" name="points" min="0"><br>
+<input type="number" id="points" name="points" min="0" step="0.1"><br>
 
 <br>
 <input type="button" id="submitForm" value="Pridať">

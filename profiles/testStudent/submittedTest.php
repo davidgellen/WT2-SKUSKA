@@ -93,7 +93,7 @@
             ?>
             <label for=<?php echo "points" . $key;?>>Hodnotenie:</label><br>
             <?php $currentPointsRecieved = $pointsRecieved->$key; ?>
-            <input type="number" id=<?php echo "points" . $key;?> name=<?php echo "points" . $key;?> min="0" 
+            <input type="number" id=<?php echo "points" . $key;?> name=<?php echo "points" . $key;?> min="0" step="0.1"
                 value = <?php echo $currentPointsRecieved;?> data-qid = <?php echo $key;?> class = "pointsInput">
             <?php
             echo "<br>----------------------<br>";

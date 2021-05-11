@@ -146,7 +146,7 @@ if(isset($_POST)){
             case "short":
                 if(strtolower(removeAccents($studentAnswer)) == strtolower(removeAccents($question->correctAnswer))){
                     $content["pointsRecieved"][$qid] = $question->points;
-                    $content["pointsRecieved"]["total"] = intval($content["pointsRecieved"]["total"]) + intval($content["pointsRecieved"][$qid]);
+                    $content["pointsRecieved"]["total"] = doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]);
                 }
                 break;
             case "multi":
