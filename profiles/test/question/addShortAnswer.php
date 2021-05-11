@@ -19,7 +19,7 @@
     <input type="text" id="answer" name="answer"><br>
 
     <label for="points">Bodovanie</label><br>
-    <input type="number" id="points" name="points" min="0"><br>
+    <input type="number" id="points" name="points" min="0" step="0.1"><br>
 
     <input type="submit" id ="shortAnswerSubmit" value = "Vytvor otázku">
 
