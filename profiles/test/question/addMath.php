@@ -197,7 +197,7 @@ if(isset($_SESSION['logged_as'])){
         <input type = "hidden" name = "equationJsonForm" id = "equationJsonForm" value = "skryty input">
 
         <label for="points">Bodovanie</label><br>
-        <input type="number" id="points" name="points" min="0" required><br>
+        <input type="number" id="points" name="points" min="0" step = "0.1" required><br>
         <input type = "submit" value = "Vytvoriť" class="btnActivation">
     </form>
 
@@ -236,8 +236,8 @@ if(isset($_SESSION['logged_as'])){
 
             <div id="brackets" class="tab outer">
                 <ul class="inner-tab-links tab-links">
-                    <li class="innerTab active"><a href="#bracketsSingle">Single</a></li>
-                    <li class="innerTab"><a href="#bracketsPair">Pair</a></li>
+                    <li class="innerTab active"><a href="#bracketsSingle">Jedny</a></li>
+                    <li class="innerTab"><a href="#bracketsPair">Párové</a></li>
                 </ul>
                 <div class="tab-content tab-content-nested">
                     <div id="bracketsSingle" class="tab inner active">
@@ -263,9 +263,9 @@ if(isset($_SESSION['logged_as'])){
 
             <div id="symbols" class="tab outer">
                 <ul class="inner-tab-links tab-links">
-                    <li class="innerTab active"><a href="#symbolsOperators">Operators</a></li>
-                    <li class="innerTab"><a href="#symbolsGreek">Greek</a></li>
-                    <li class="innerTab"><a href="#symbolsMisc">Misc</a></li>
+                    <li class="innerTab active"><a href="#symbolsOperators">Operátory</a></li>
+                    <li class="innerTab"><a href="#symbolsGreek">Grécke</a></li>
+                    <li class="innerTab"><a href="#symbolsMisc">Iné</a></li>
                 </ul>
                 <div class="tab-content tab-content-nested">
                     <div id="symbolsOperators" class="tab inner active">
@@ -346,8 +346,8 @@ if(isset($_SESSION['logged_as'])){
 
             <div id="functions" class="tab outer">
                 <ul class="inner-tab-links tab-links">
-                    <li class="innerTab active"><a href="#functionsTrig">Trig</a></li>
-                    <li class="innerTab"><a href="#functionsMisc">Misc</a></li>
+                    <li class="innerTab active"><a href="#functionsTrig">Trigonometrické</a></li>
+                    <li class="innerTab"><a href="#functionsMisc">Iné</a></li>
                 </ul>
                 <div class="tab-content tab-content-nested">
                     <div id="functionsTrig" class="tab inner active">
@@ -514,17 +514,17 @@ if(isset($_SESSION['logged_as'])){
                 <img class="menuItem" id="hatAccentButton" src="../../../scripts/equation-editor-master/src/MenuImages/png/hatAccent.png">
                 <img class="menuItem" id="vectorAccentButton" src="../../../scripts/equation-editor-master/src/MenuImages/png/vectorAccent.png">
                 <img class="menuItem" id="barAccentButton" src="../../../scripts/equation-editor-master/src/MenuImages/png/barAccent.png">
-                <div style="display: inline-block">rows: <input type="text" id="rows" /><br> cols: <input type="text" id="cols" /></div>
-                <div class="menuItem" id="matrixButton" style="font-size: 35px; padding: 5px 5px; display: inline-block">Matrix</div>
+                <div style="display: inline-block">Riadky: <input type="text" id="rows" /><br> Stĺpce: <input type="text" id="cols" /></div>
+                <div class="menuItem" id="matrixButton" style="font-size: 35px; padding: 5px 5px; display: inline-block">Matica</div>
             </div>
         </div>
     </div>
     </div>
     <br>
 
-    <button id="toJSON" class="btnActivation">To JSON</button><br>
+    <!-- <button id="toJSON" class="btnActivation">To JSON</button><br>
     JSON:
-    <div id="ContentJSON" class="toJsonMath">&nbsp</div>
+    <div id="ContentJSON" class="toJsonMath">&nbsp</div> -->
     <script>
         // toto len jebnut do odpovede v teste a je otazka spravena
         $('#toJSON').on('click', function() {

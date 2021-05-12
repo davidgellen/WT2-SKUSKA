@@ -99,7 +99,7 @@ session_start();
                 //echo "hodnotenie: " . $pointsRecieved->$key . "<br>";
             ?>
             <label for=<?php echo "points" . $key;?>>Hodnotenie:</label><br>
-            <?php $currentPointsRecieved = $pointsRecieved->$key; ?>
+            <?php $currentPointsRecieved = @$pointsRecieved->$key; ?>
             <input type="number" id=<?php echo "points" . $key;?> name=<?php echo "points" . $key;?> min="0" step="0.1"
                 value = <?php echo $currentPointsRecieved;?> data-qid = <?php echo $key;?> class = "pointsInput">
             <?php
@@ -119,12 +119,17 @@ session_start();
             .then(response => response.json())
             .then(json => {
                 try{
-                    let jsonString = JSON.stringify(json["answers"][$(this).data("qid")]);
-                    let jsonObj = $.parseJSON(jsonString);
-                    var equation = eqEd.Equation.constructFromJsonObj(jsonObj);
-                    $(this).empty();
-                    $(this).append(equation.domObj.value);
-                    equation.updateAll();
+                    let string = json["answers"][$(this).data("qid")];
+                    if (string.length == 0){
+                        $(this).html("Nevyplnené");
+                    } else {
+                        let jsonString = JSON.stringify(string);
+                        let jsonObj = $.parseJSON(jsonString);
+                        var equation = eqEd.Equation.constructFromJsonObj(jsonObj);
+                        $(this).empty();
+                        $(this).append(equation.domObj.value);
+                        equation.updateAll();
+                    }
                 }
                 catch(error){ 
                     console.log(error); 
