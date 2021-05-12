@@ -322,30 +322,35 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
             //$("#result").html(localStorage.getItem("index"));
         });
 
-    })
-    //Parovanie
-         $( function() {
-            $( ".sortable" ).sortable();
+        //Parovanie
+        $( function() {
+            $( ".sortable" ).sortable({
+                update: function(e, ui) {
+                    // gets the new and old index then removes the temporary attribute
+                    var obj = <?php echo json_encode($pairArr); ?>;
+                    var obj2 = <?php echo json_encode($questID); ?>;
+                    answersToSend=[];
+                    var i=0;
+                    while(obj[i]!=null){
+                        var tmp=[];
+                        var unlist=document.getElementById(obj[i]);
+                        var j=0;
+                        while(unlist.getElementsByTagName('li')[j]!=null){
+                            //console.log(unlist.getElementsByTagName('li')[j].innerHTML);
+                            tmp.push(unlist.getElementsByTagName('li')[j].innerHTML);
+                            j++;
+                        }
+                        //var answerObj = {id:obj[i], answers:tmp};
+                        answersToSend.push({id:obj2[i], answers:tmp});
+                        i++;
+                        
+                    }
+                }
+            });
             $( ".sortable" ).disableSelection();
   		});
-        var obj = <?php echo json_encode($pairArr); ?>;
-        var obj2 = <?php echo json_encode($questID); ?>;
-        answersToSend=[];
-        var i=0;
-        while(obj[i]!=null){
-            var tmp=[];
-            var unlist=document.getElementById(obj[i]);
-            var j=0;
-            while(unlist.getElementsByTagName('li')[j]!=null){
-                //console.log(unlist.getElementsByTagName('li')[j].innerHTML);
-                tmp.push(unlist.getElementsByTagName('li')[j].innerHTML);
-                j++;
-            }
-            //var answerObj = {id:obj[i], answers:tmp};
-            answersToSend.push({id:obj2[i], answers:tmp});
-            i++;
-            
-        }
+    })
+    
         
 
     

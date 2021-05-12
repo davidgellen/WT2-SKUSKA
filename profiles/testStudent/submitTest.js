@@ -58,9 +58,13 @@ $('#endTest').click( function(e) {
     }
     
     //odpovede z parovania
-    answersToSend.forEach(function (arrayItem) {
-        testData[arrayItem.id]=arrayItem.answers;
-    });
+    if (typeof answersToSend !== 'undefined') {
+        // the variable is defined
+        answersToSend.forEach(function (arrayItem) {
+            testData[arrayItem.id]=arrayItem.answers;
+        });
+    }
+
 
     e.preventDefault();
     $.ajax({
