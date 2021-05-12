@@ -1,26 +1,30 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+    <?php include "../../includes/header.php" ?>
+    <link rel="stylesheet" href="../../styles/styleBody.css">
+    <link rel="stylesheet" href="../../styles/resultStudent.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Hodnotenie</title>
 </head>
 <body>
 
     <?php
-        session_start();
         require_once "../../database/TestService.php";
         $val = "window.location='../test/detail.php?test={$_SESSION["test"]["code"]}';";
-        echo '<button onClick='.$val.' value="click here">SPAT</button>';
+        echo '<button onClick='.$val.' value="click here" class="btn1" style="float: right;">Späť</button>';
 
         // tieto spany sa vyuzivaju v scripte,
         // mozes to preprobit na hocico len innerHTML tych span ideciek musi zostat nezmenene
-        echo "<br>user: <span id = 'aisId'>" . $_POST["ais_id"] . "</span><br>";
-        echo "test: " . $_SESSION["test"]["code"] . "<br><br>";
-        echo "<p>testId: <span id = 'testId'>{$_SESSION["test"]["id"]}</span></p><br>";
+        echo "<div style='float: left;'>AIS ID: <span id = 'aisId'>" . $_POST["ais_id"] . "</span><br>";
+        echo "Kód testu: " . $_SESSION["test"]["code"] . "<br><br>";
+        echo "<p hidden>testId: <span id = 'testId'>{$_SESSION["test"]["id"]}</span></p></div>";
+
+        echo "<div style='height: 5em;'></div>";
 
         $recordPath = "../../testStudentsJSON/test{$_SESSION["test"]["id"]}/{$_POST["ais_id"]}.json";
         $testRecordFile = json_decode(file_get_contents($recordPath));
@@ -29,13 +33,16 @@
         $testTemplateFile = json_decode(file_get_contents($templatePath));
 
         $pointsRecieved = $testRecordFile->pointsRecieved;
-        
+
+        $tmp = 1;
         foreach ($testTemplateFile->questions as $key => $question){
-            echo "qId: ".$key . " - ". $question->question . "({$question->type})<br>";
+            echo "<div class='answer'>";
+            echo "ID: " . $tmp++;
+            echo "<span hidden>qId: ".$key . " - ". $question->question . "({$question->type})</span><br>";
             switch ($question->type){
                 case "short":
                     // Zuzka ?>
-                    <div><p>Odpoved: </p></div>
+                    <div><p>Odpoveď: </p></div>
                     <p><?=$testRecordFile->answers->$key?></p><br><?php
                     break;
                 case "multi": ?>
@@ -80,7 +87,7 @@
                 case "math":
                     ?>
                         <?php //tu sa nacita rovnica ktoru zadal ucitel ?>
-                        <div><p>Odpoved:</p></div>
+                        <div><p>Odpoveď:</p></div>
                         <div class="renderedEq" data-qid = <?php echo "\"".$key."\""; ?>></div>
                     <?php
                     break;
@@ -96,13 +103,13 @@
             <input type="number" id=<?php echo "points" . $key;?> name=<?php echo "points" . $key;?> min="0" step="0.1"
                 value = <?php echo $currentPointsRecieved;?> data-qid = <?php echo $key;?> class = "pointsInput">
             <?php
-            echo "<br>----------------------<br>";
+            echo "</div>";
         }
-        echo "<p>spolu: <span id = 'pointTotal'>" . $pointsRecieved->total ."</span></p><br>";
+        echo "<p>Spolu bodov: <span id = 'pointTotal'>" . $pointsRecieved->total ."</span></p><br>";
 
     ?>
 
-    <button id = "evaluateQuestionsButton">Hodnot</button>
+    <button id = "evaluateQuestionsButton" class="btn1">Hodnotiť</button>
 
     <script>
 

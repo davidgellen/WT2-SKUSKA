@@ -1,51 +1,53 @@
 <?php
-
-session_start();
-
-echo "add Pairing";
-
-echo "<pre>";
-var_dump($_POST);
-echo "</pre>";
-
+    session_start();
+    /*echo "add Pairing";
+    echo "<pre>";
+    var_dump($_POST);
+    echo "</pre>";*/
+    if(isset($_SESSION['logged_as'])){
+        if(!$_SESSION['logged_as'] == "teacher"){
+            session_destroy();
+            header("Location: ../../../index.php");
+        }
+    }
 ?>
-
-ked vytvoris otazku tak po ulozeni asi redirect na detail naspat neviem
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <?php include "../../../includes/header.php" ?>
+    <link rel="stylesheet" href="../../../styles/styleBody.css">
+    <link rel="stylesheet" href="../../../styles/addTestQuestion.css">
+    <title>Otázka s párovácými možnosťami</title>
 </head>
 <body>
+    <h1>Vytvorenie párovacej otázky</h1><br>
     <form action=<?="../../../scripts/questions/createPairing.php?test=" . $_SESSION["test"]["code"]?> id="pairAnswerForm" method="POST">
-        <label for="question">Review of W3Schools:</label>
-        <textarea id="question" name="question" rows="4" cols="50"></textarea>
+        <h3><label for="question">Znenie otázky</label></h3><br>
+        <textarea id="question" name="question" rows="4" cols="50" required></textarea>
         <br><br>
-        <div id="first" class="field_wrapper" style="float:left;">
-            <div>
-                <input type="text" name="field_name1[]" value=""/>
-                <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
-                <a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a>
+        <div style="margin: auto; max-width: 30em;">
+            <div id="first" class="field_wrapper">
+                <a href="javascript:void(0);" class="add_button" title="Add field"><strong class="btnActivation">+</strong></a>
+                <a href="javascript:void(0);" class="remove_button"><strong class="btnActivation">-</strong></a><br><br>
+                <div>
+                    <input type="text" name="field_name1[]" value=""/>
+                </div>
             </div>
-        </div>
 
-        <div id="second" class="field_wrapper" style="float:left;">   
-            <div>
-                <input type="text" name="field_name2[]" value=""/>
-                
+            <div id="second" class="field_wrapper" style="float: right;">
+                <div>
+                    <input type="text" name="field_name2[]" value=""/>
+                </div>
             </div>
         </div>
         <label for="points">Body:</label><br>
-        <input type="number" name="points" value=""/><br><br>
-        <input type="submit" value="Submit">
+        <input type="number" name="points" value="" required><br><br>
+        <input type="submit" value="Vytvoriť" class="btnActivation">
     </form>
 
     <br>
 
-    <button onclick="location.href = '../detail.php?test=<?php echo $_SESSION['test']['code']; ?>';" >spat na detail</button><br>
+    <button onclick="location.href = '../detail.php?test=<?php echo $_SESSION['test']['code']; ?>';" class="btnActivation">Späť</button><br>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function(){
@@ -54,9 +56,8 @@ ked vytvoris otazku tak po ulozeni asi redirect na detail naspat neviem
         var wrapper1 = $('#first'); //Input field wrapper
         var wrapper2 = $('#second'); //Input field wrapper
 
-
-        var fieldHTML1 = '<div><input type="text" name="field_name1[]" value=""/></div>'; //New input field html 
-        var fieldHTML2 = '<div><input type="text" name="field_name2[]" value=""/></div>'; //New input field html 
+        var fieldHTML1 = '<div><input type="text" name="field_name1[]" value=""></div>'; //New input field html
+        var fieldHTML2 = '<div><input type="text" name="field_name2[]" value=""></div>'; //New input field html
 
         var x = 1; //Initial field counter is 1
         

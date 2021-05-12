@@ -1,9 +1,17 @@
+<?php
+session_start();
+
+if(isset($_SESSION['logged_as'])){
+    if(!$_SESSION['logged_as'] == "teacher"){
+        session_destroy();
+        header("Location: ../../../index.php");
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <title>Pridaj matematickú otázku</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="../../../scripts/equation-editor-master/src/lib/underscore-1.6.0.js"></script>
     <script src="../../../scripts/equation-editor-master/src/lib/mousetrap-1.4.6.js"></script>
@@ -174,29 +182,34 @@
     <script src="../../../scripts/equation-editor-master/src/app/js/latexGenerator.js"></script>
     <link href="../../../scripts/equation-editor-master/src/Fonts/TeX/font.css" rel="stylesheet" type="text/css" charset="utf-8" />
     <link href="../../../scripts/equation-editor-master/src/app/css/equationEditor.css" rel="stylesheet" type="text/css" charset="utf-8" />
+    <?php include "../../../includes/header.php" ?>
+    <link rel="stylesheet" href="../../../styles/styleBody.css">
+    <link rel="stylesheet" href="../../../styles/addTestQuestion.css">
+    <title>Otázka s matematikou</title>
 </head>
 
 <body>
-    <button id="toJSON">To JSON</button>
-
+    <h1>Vytvorenie matematickej otázky</h1><br>
     <form action = "../../../scripts/questions/createMath.php" method = "post" id = "createMathForm" onsubmit = "return saveEquationJsonToForm()">
-        <label for="questionText">Znenie otázky</label><br>
-        <textarea id="questionText" name="questionText" cols="60" rows="5" form="createMathForm"></textarea><br>
+        <h3><label for="questionText">Znenie otázky</label></h3><br>
+        <textarea id="questionText" name="questionText" cols="60" rows="5" form="createMathForm" required></textarea><br>
 
         <input type = "hidden" name = "equationJsonForm" id = "equationJsonForm" value = "skryty input">
 
         <label for="points">Bodovanie</label><br>
-        <input type="number" id="points" name="points" min="0"><br>
-        <input type = "submit" value = "Vytvor otazku">
+        <input type="number" id="points" name="points" min="0" required><br>
+        <input type = "submit" value = "Vytvoriť" class="btnActivation">
     </form>
-    
-    <br /><br />
-    <input id="hiddenFocusInput" style="width: 0; height: 0; opacity: 0; position: absolute; top: 0; left: 0;" type="text" autocapitalize="off" />
-    <div id="loadingMessageOuter" style="width: 234px; height: 64px;">
-        <div id="loadingMessage" class="fontSizeSmaller" style="width: 234px; height: 64px; position: fixed;"></div>
-    </div>
-    <div class="equation-editor"></div>
-    <div class="tabs">
+
+    <br><br>
+
+    <div style="margin: auto;">
+        <input id="hiddenFocusInput" style="width: 0; height: 0; opacity: 0; position: absolute; top: 0; left: 0;" type="text" autocapitalize="off" />
+        <div id="loadingMessageOuter" style="width: 234px; height: 64px;">
+            <div id="loadingMessage" class="fontSizeSmaller" style="width: 234px; height: 64px; margin: auto;"></div>
+        </div><br>
+        <div class="equation-editor" style="margin: 3em;"></div>
+        <div class="tabs">
         <ul class="outer-tab-links tab-links">
             <li class="outerTab active"><a href="#common">Základy</a></li>
             <li class="outerTab"><a href="#brackets">Zátvorky</a></li>
@@ -207,7 +220,7 @@
             <li class="outerTab"><a href="#misc">Iné</a></li>
         </ul>
 
-        <div class="tab-content" id="tab-content-top">
+        <div class="tab-content" id="tab-content-top" style="margin: auto;">
             <div id="common" class="tab outer active">
                 <img class="menuItem" id="stackedFractionButton" src="../../../scripts/equation-editor-master/src/MenuImages/png/stackedFraction.png">
                 <img class="menuItem" id="superscriptButton" src="../../../scripts/equation-editor-master/src/MenuImages/png/superscript.png">
@@ -506,8 +519,12 @@
             </div>
         </div>
     </div>
+    </div>
+    <br>
+
+    <button id="toJSON" class="btnActivation">To JSON</button><br>
     JSON:
-    <div id="ContentJSON" style="margin: 20px; border: solid 1px #000">&nbsp;</div>
+    <div id="ContentJSON" class="toJsonMath">&nbsp</div>
     <script>
         // toto len jebnut do odpovede v teste a je otazka spravena
         $('#toJSON').on('click', function() {
@@ -546,19 +563,14 @@
 
     <br>
 
-    
-
-    <button onclick="location.href = '../detail.php?test=<?php echo $_POST['testcode']; ?>';" >spat na detail</button><br>
+    <button onclick="location.href = '../detail.php?test=<?php echo $_POST['testcode']; ?>';" class="btnActivation">Späť</button>
 </body>
-
 </html>
 
 <?php
-
-    echo "addMath";
+    /*echo "addMath";
     echo "<pre>";
     var_dump($_POST);
-    echo "</pre>";
-
+    echo "</pre>";*/
 ?>
 

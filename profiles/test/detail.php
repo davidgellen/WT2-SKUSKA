@@ -7,7 +7,15 @@ require_once "../../database/QuestionService.php";
 require_once "../../database/TestRecordService.php";
 
 if(isset($_SESSION['logged_as'])){
-    if(!$_SESSION['logged_as'] == "teacher"){
+    if(!$_SESSION['logged_as'] == "teacher" || $_GET['test'] == ""){
+        session_destroy();
+        header("Location: ../../index.php");
+    }
+}else{
+    if($_GET['test'] == ""){
+        session_destroy();
+        header("Location: ../../index.php");
+    }else{
         session_destroy();
         header("Location: ../../index.php");
     }
@@ -82,9 +90,11 @@ $_SESSION["test"] = $testInfo;
                 <?php
                 $path = '../../testTemplatesJSON/test' . $_SESSION["test"]["id"] . '.json';
                 $questions = json_decode(file_get_contents($path))->questions;
+                $tmp = 1;
                 foreach ($questions as $key => $question){
                     echo "<div class='question'>";
-                    echo "<div class='questionWindows' style='float: left;'>ID : " . $key . "</div>";
+                    echo "<div class='questionWindows' style='float: left;' hidden>ID : " . $key . "</div>";
+                    echo "<div class='questionWindows' style='float: left;'>ID : " . $tmp++ . "</div>";
                     echo "<div class='questionWindows' style='float: right;'>Max. bodov: " . $question->points . "</div>";
                     echo " Typ otázky: " . formatQuestionType($question->type) . "<br>";
                     echo "<br>";
@@ -99,11 +109,6 @@ $_SESSION["test"] = $testInfo;
 
         </div>
         <div class="col-sm-5">
-            <h2>Exportovanie výsledkov</h2>
-            <form action = "exportcsv.php" method = "get">
-                <input type = "submit" value = "Export do csv" class="btnActivation" style="float: right;">
-            </form>
-
             <h2>Zoznam študentov prihlásených na test</h2>
             <p>Kliknutím na hodnotenie sa zobrazí test študenta<p>
                 <?php
@@ -128,6 +133,11 @@ $_SESSION["test"] = $testInfo;
                     echo "</div>";
                 }
             ?>
+            <br>
+            <h2>Exportovanie výsledkov</h2>
+            <form action = "exportcsv.php" method = "get">
+                <input type = "submit" value = "Export do csv" class="btnActivation" style="float: left;" >
+            </form>
         </div>
     </div>
 </div>

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../scripts/qrcodelibrary/qrcode.min.js"></script>
+    <?php include "../../includes/header.php" ?>
+    <link rel="stylesheet" href="../../styles/styleBody.css">
+    <link rel="stylesheet" href="../../styles/studentTestQuestion.css">
     <title>QR kód</title>
+    <script src="../../scripts/qrcodelibrary/qrcode.min.js"></script>
+
 </head>
-<body>
+<body class="qrcode">
+    <h1>Sken QR kódu z obrázka</h1>
     <p>Po odfotení a uložení odpovede, dajte hotovo</p>
     <br>
-    <div id="qrcode"></div>
-    <br>
-    <button onclick="hotovo()">Hotovo</button>
+    <div id="qrcode" style="display: inline-block;"></div>
+    <br><br>
+    <button onclick="hotovo()" class="btn1">Hotovo</button>
 
     <script type="text/javascript">
         base = window.location.href;

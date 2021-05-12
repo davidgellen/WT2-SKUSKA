@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include "../../includes/header.php" ?>
+    <link rel="stylesheet" href="../../styles/styleBody.css">
+    <link rel="stylesheet" href="../../styles/studentTestQuestion.css">
+    <title>Kresba</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -28,7 +29,6 @@
         });
     </script>
 
-    <title>Document</title>
     <style>
         #canvas {
         border: 1px solid black; 
@@ -41,16 +41,16 @@
         }
     </style>
 </head>
-<body>
-    <button onclick="Restore()">Undo</button>
-    <button onclick="Clear()">Clear</button>
+<body class="draw">
+    <button onclick="Restore()" class="btnActivation">Undo</button>
+    <button onclick="Clear()" class="btnActivation">Clear</button>
     <input type="color" oninput="stroke_color = this.value" placeholder="Colors">
     </div>
     <input type="range" min="1" max="100" oninput="stroke_width = this.value">
-    <br>
+    <br><br>
     <canvas id="canvas" width="600" height="400"></canvas>
-    <br>
-    <button id="canvasbtn">Uložiť</button>
+    <br><br>
+    <button id="canvasbtn" class="btn1">Uložiť</button>
     <script>
         //https://codepen.io/BananaCoding/pen/mdrGjpL
         let canvas = document.getElementById("canvas");
