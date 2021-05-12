@@ -25,16 +25,16 @@
         <h3><label for="question">Znenie otázky</label></h3><br>
         <textarea id="question" name="question" rows="4" cols="50" required></textarea>
         <br><br>
+        <a href="javascript:void(0);"class="add_button" title="Add field"><strong class="btnActivation">+</strong></a>
+        <a href="javascript:void(0);" class="remove_button"><strong class="btnActivation">-</strong></a><br><br>
         <div style="margin: auto; max-width: 30em;">
-            <div id="first" class="field_wrapper">
-                <a href="javascript:void(0);" class="add_button" title="Add field"><strong class="btnActivation">+</strong></a>
-                <a href="javascript:void(0);" class="remove_button"><strong class="btnActivation">-</strong></a><br><br>
+            <div id="first" class="field_wrapper" style="float: left;">
                 <div>
-                    <input type="text" name="field_name1[]" value=""/>
+                    <input type="text" name="field_name1[]" value="" />
                 </div>
             </div>
 
-            <div id="second" class="field_wrapper" style="float: right;">
+            <div id="second" class="field_wrapper">
                 <div>
                     <input type="text" name="field_name2[]" value=""/>
                 </div>
@@ -53,6 +53,7 @@
     $(document).ready(function(){
         var maxField = 10; //Input fields increment limitation
         var addButton = $('.add_button'); //Add button selector
+        var removeButton = $('.remove_button'); //Remove button selector
         var wrapper1 = $('#first'); //Input field wrapper
         var wrapper2 = $('#second'); //Input field wrapper
 
@@ -70,16 +71,19 @@
                 $(wrapper2).append(fieldHTML2); //Add field html
             }
         });
-        
-        //Once remove button is clicked
-        $(wrapper1).on('click', '.remove_button', function(e){
-            e.preventDefault();
-            //$(wrapper1).parent('div').remove(); //Remove field html
-            //$(wrapper2).parent('div').remove(); //Remove field html
-            $(wrapper1).children('div').last().remove();
-            $(wrapper2).children('div').last().remove();
-            x--; //Decrement field counter
+
+        $(removeButton).click(function(){
+            //Check maximum number of input fields
+            if(x>1){
+                console.log("somtu");
+                //$(wrapper1).parent('div').remove(); //Remove field html
+                //$(wrapper2).parent('div').remove(); //Remove field html
+                $(wrapper1).children('div').last().remove();
+                $(wrapper2).children('div').last().remove();
+                x--; //Decrement field counter
+            }
         });
+        
     });
 </script>
 </body>
