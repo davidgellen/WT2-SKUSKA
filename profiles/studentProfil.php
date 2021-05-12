@@ -159,7 +159,7 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
                         shuffle($allAnswers); ?>
                         <div class='multiAnswer' id=<?=$key?>> <?php
                         foreach($allAnswers as $a){ 
-                            echo "<input class=" . $key . " type='checkbox' value=".$a.">
+                            echo "<input class=" . $key . " type='checkbox' value='".$a."'>
                             <label>".$a."</label> <br>";
                         } ?>
                         </div> <?php
