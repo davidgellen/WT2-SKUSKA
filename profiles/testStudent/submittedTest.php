@@ -38,7 +38,8 @@ session_start();
         $tmp = 1;
         foreach ($testTemplateFile->questions as $key => $question){
             echo "<div class='answer'>";
-            echo "ID: " . $tmp++;
+            echo "Otázka č. " . $tmp++;
+            echo "<br><span>".$question->question."</span>";
             echo "<span hidden>qId: ".$key . " - ". $question->question . "({$question->type})</span><br>";
             switch ($question->type){
                 case "short":
