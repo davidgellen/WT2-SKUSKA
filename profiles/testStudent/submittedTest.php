@@ -106,7 +106,7 @@ session_start();
             <?php
             echo "</div>";
         }
-        echo "<p>Spolu bodov: <span id = 'pointTotal'>" . $pointsRecieved->total ."</span></p><br>";
+        echo "<p>Spolu bodov: <span id = 'pointTotal'>" . round($pointsRecieved->total,2) ."</span></p><br>";
         echo "</div>";
 
     ?>
