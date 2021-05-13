@@ -25,7 +25,7 @@ session_start();
         echo "<p>Kód testu: <span id = 'codeValue'>" . $_SESSION["test"]["code"] . "</span></p><br><br>";
         echo "<p hidden>testId: <span id = 'testId'>{$_SESSION["test"]["id"]}</span></p></div>";
 
-        echo "<div style='height: 5em;'></div>";
+        echo "<div style='height: 5em; min-width: 10em;'></div>";
 
         $recordPath = "../../testStudentsJSON/test{$_SESSION["test"]["id"]}/{$_POST["ais_id"]}.json";
         $testRecordFile = json_decode(file_get_contents($recordPath));
@@ -37,7 +37,7 @@ session_start();
 
         $tmp = 1;
         foreach ($testTemplateFile->questions as $key => $question){
-            echo "<div class='answer'>";
+            echo "<div class='answer' style='min-width: 30em;'>";
             echo "Otázka č. " . $tmp++;
             echo "<br><span>".$question->question."</span>";
             echo "<span hidden>qId: ".$key . " - ". $question->question . "({$question->type})</span><br>";
@@ -113,7 +113,7 @@ session_start();
     ?>
 
     <button id = "evaluateQuestionsButton" class="btn1">Hodnotiť</button>
-    <button onclick="toPdf();">Export do PDF</button>
+    <button onclick="toPdf();" class="btn1">Export do PDF</button>
 
     <script>
     function toPdf() {

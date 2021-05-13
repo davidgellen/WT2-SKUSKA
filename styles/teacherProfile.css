@@ -24,12 +24,13 @@ hr.style-eight {
     background: linear-gradient(133deg, rgba(29,203,253,1) 50%, rgba(252,176,69,1) 100%);
     cursor: pointer;
     padding: 0.5em 0;
-    margin: 0.5em 0;
+    margin: 0.5em auto;
     border-radius: 0.5em;
     border: 3px solid #16caca;
     transition: 0.1s;
-    min-width: 4em;
-    max-widrh: 6em;
+    min-width: 5em;
+    max-width: 8em;
+
 }
 
 .menu_opt:hover{
@@ -40,6 +41,8 @@ hr.style-eight {
 
 #profile{ /*Spolocne zadefinovany je aj s 'content'*/
     text-align: center;
+    min-height: 95vh;
+    border-right: 3px dotted black;
 }
 
 #content{ /*Spolocne zadefinovany je aj s 'profile'*/
@@ -86,6 +89,7 @@ hr.style-eight {
     border-radius: 3px;
     background-color: rgba(163,209,255,0.35);
     height: 100%;
+    min-width: 15em;
 }
 
 a:link, a:visited {
@@ -189,8 +193,4 @@ h4{
     background-color: #e5e5e5;
     min-height: 9em;
     margin-bottom: 1em;
-}
-
-.debug{ /*TODO: Potom zmazať*/
-    /*border: 3px dotted black;*/
 }

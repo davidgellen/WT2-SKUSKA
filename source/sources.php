@@ -31,26 +31,21 @@ pozadie- https://www.svgbackgrounds.com/#rainbow-vortex by
                     <li class="nav-item">
                         <a class="nav-link" href="sources.php">Zdroje</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            O nás
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../about/david_g.php">David Gellen</a>
-                            <a class="dropdown-item" href="../about/patrik_i.php">Patrik Ištók</a>
-                            <a class="dropdown-item" href="../about/patrik_k.php">Patrik Kupčulák</a>
-                            <a class="dropdown-item" href="../about/peter_k.php">Peter Krajčí</a>
-                            <a class="dropdown-item" href="../about/zuzana_m.php">Zuzana Medzihradská</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="../about/goals.php">Ciele</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about/goals.php">Ciele</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
     <article>
-        <h1>Ciele a výsledky</h1>
+        <a href="https://i.pinimg.com/originals/b1/b7/de/b1b7de37299d6d589ba3d7e28652869b.png">Ikona</a>
+        <a href="http://mathlive.io/">Matematika</a>
+        <a href="https://github.com/endroid/qr-code">QR Sken na obrázok</a>
+        <a href="https://ekoopmans.github.io/html2pdf.js/">Export to pdf</a>
+        <a href="https://jqueryui.com/sortable/">Párovanie</a>
+        <a href="https://codepen.io/BananaCoding/pen/mdrGjpL">Kresba</a>
+        <a href="https://getbootstrap.com/">Bootstrap</a>
     </article>
 </div>
 <?php include "../includes/footer.php";?>

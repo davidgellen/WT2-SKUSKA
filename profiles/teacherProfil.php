@@ -54,8 +54,8 @@ if(isset($_SESSION['logged_as'])){
         </nav>
     </header>
     <div class="container">
-        <div class="row" style="height: 91.3vh;">
-            <div class="col-sm-3 debug" id="profile">
+        <div class="row" style="min-height: 95vh;">
+            <div class="col-sm-3" id="profile">
                 <div id="profile_info">
                     <?php
                     if(isset($_SESSION['name']) && isset($_SESSION['surname'])){
@@ -65,13 +65,11 @@ if(isset($_SESSION['logged_as'])){
                 </div>
                 <hr class="style-eight">
                 <div id="profile_menu">
-                    <?php //TODO: Menu s roznymi polozkami(zobrazenie testov, pridanie testov,...) - musi byt rovnaky pocet ako v kontextovom okne ?>
                     <div class="menu_opt" onclick="menuOption(this)" id="opt1">Prehľad testov</div>
                     <div class="menu_opt" onclick="menuOption(this)" id="opt2">Vytvorenie testu</div>
                 </div>
             </div>
-            <div class="col-sm-9 debug" id="content">
-                <?php //TODO: Kontent - rozne veci, bude sa zobrazovat podla menu na ktore klikne ucitel ?>
+            <div class="col-sm-9" id="content">
                 <div id="opt1_content" style="display: block;">
                     <div class="container">
                         <div class="row">

@@ -99,7 +99,7 @@ $_SESSION["test"] = $testInfo;
                     echo " Typ otázky: " . formatQuestionType($question->type) . "<br>";
                     echo "<br>";
                     echo "Otázka: " . $question->question . "<br>";
-                    //echo "správna odpoveď: " . $question->correctAnswer . "<br>"; //TODO: Add answers to question
+                    //echo "správna odpoveď: " . $question->correctAnswer . "<br>";
                     echo "</div>";
                 }
                 ?>

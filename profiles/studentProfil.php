@@ -115,7 +115,7 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
         </nav>
     </header>
     <!-- <a href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a><br>  //TODO: Nefunkcne ak je v teste student - treba dokoncit, popr vymazat a nechat tlacitko Odhlasit sa-->
-    <section id="exam"> <!-- TODO: export pdf/csv -->
+    <section id="exam">
         <div style="float: right;">
             <p>Prihlásený: <span id="name"><?=$_SESSION['name']?> </span><span id="surname"><?=$_SESSION['surname']?> </span><br>
             ID: <span id="aisId"><?=$_SESSION['ais_id']?></span></p>

@@ -95,19 +95,8 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
                     <li class="nav-item">
                         <a class="nav-link" href="source/sources.php">Zdroje</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            O nás
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="about/david_g.php">David Gellen</a>
-                            <a class="dropdown-item" href="about/patrik_i.php">Patrik Ištók</a>
-                            <a class="dropdown-item" href="about/patrik_k.php">Patrik Kupčulák</a>
-                            <a class="dropdown-item" href="about/peter_k.php">Peter Krajčí</a>
-                            <a class="dropdown-item" href="about/zuzana_m.php">Zuzana Medzihradská</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="about/goals.php">Ciele</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about/goals.php">Ciele</a>
                     </li>
                 </ul>
             </div>
@@ -115,7 +104,7 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
     </header>
     <article>
         <div id="login_form">
-            <h1>Prihllásenie</h1>
+            <h1>Prihlásenie</h1>
             <div class="container">
                 <div class="row">
                     <button class="col-sm-6 btn btn-info" onclick="activateForm(this)" id="loginStudent">Prihlásiť sa ako žiak</button>

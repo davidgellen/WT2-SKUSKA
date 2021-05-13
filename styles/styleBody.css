@@ -42,9 +42,6 @@ footer {
     background: linear-gradient(90deg, #a3eafc, #e2fcf6);
 }
 
-.debug{
-    border: 1px solid black;
-}
 
 .container {
     margin: 0;

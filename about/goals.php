@@ -23,27 +23,85 @@
                     <li class="nav-item">
                         <a class="nav-link" href="../source/sources.php">Zdroje</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            O nás
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="david_g.php">David Gellen</a>
-                            <a class="dropdown-item" href="patrik_i.php">Patrik Ištók</a>
-                            <a class="dropdown-item" href="patrik_k.php">Patrik Kupčulák</a>
-                            <a class="dropdown-item" href="peter_k.php">Peter Krajčí</a>
-                            <a class="dropdown-item" href="zuzana_m.php">Zuzana Medzihradská</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="goals.php">Ciele</a>
-                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="goals.php">Ciele</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
     <article>
-        <h1>Tu si daj text jaky ces</h1>
-        <a  href="../index.php"><div class="btn btn-info">Hlavná stránka</div></a>
+        <table class="table table-striped table-bordered table-hover" style="background-color: #d4f7f8;">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Meno</th>
+                <th scope="col">Úloha</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>David Gellen</td>
+                <td>Realizácia otázok s matematickým výrazom</td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Zadefinovanie testov, aktivácia a deaktivácia</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Patrik Ištók</td>
+                <td>Realizácia otázok s kreslením</td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Export do csv</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Patrik Kupčulák</td>
+                <td>Prihlasovanie sa do aplikácie</td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Finalizácia aplikácie, grafika, štruktúra</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>Peter Krajčí</td>
+                <td>Realizácia párovacích otázok</td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Info pre učiteľa o zbiehaní testov</td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Export do pdf</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>Zuzana Medzihradská</td>
+                <td>Otázky s viacerými odpoveďami</td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Otázky s krátkymi odpoveďami</td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td>Ukončenie testu</td>
+            </tr>
+            </tbody>
+        </table>
     </article>
 </div>
 <?php include "../includes/footer.php";?>

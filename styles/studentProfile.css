@@ -85,3 +85,7 @@ section{
     float: right;
     margin-right: 2em;
 }
+
+#exam{
+    min-width: 30em;
+}
