@@ -188,6 +188,10 @@ if(isset($_POST)){
                 $content["pointsRecieved"]["total"] = strval(doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]));
                 
                 break;
+            case "math":
+            case "draw":
+                $content["pointsRecieved"][$qid] = "0";
+                break;
         }
     }
 
