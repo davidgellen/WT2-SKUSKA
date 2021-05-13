@@ -1,5 +1,5 @@
 $("#evaluateQuestionsButton").click(function(){
-    let totalPoints = 0;
+    let totalPoints = 0.0;
     let allValues = {};
     $(".pointsInput").each(function(index){
         totalPoints += parseFloat($(this).val());
@@ -10,6 +10,7 @@ $("#evaluateQuestionsButton").click(function(){
 
     let ais_id = $('#aisId').html();
     let test_id = $('#testId').html();
+    let code_value = $('#codeValue').html();
 
     $("#pointTotal").html(allValues["total"]);
 
@@ -19,7 +20,7 @@ $("#evaluateQuestionsButton").click(function(){
         data: {values: allValues, ais_id: ais_id, test_id: test_id},
         datatype: 'json',
         success: function(data){
-            console.log(data);
+            window.location.href = "../test/detail.php?test="+code_value;
         },
         error: function(data){
             console.log("ajax error");

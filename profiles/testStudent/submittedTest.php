@@ -22,7 +22,7 @@ session_start();
         // mozes to preprobit na hocico len innerHTML tych span ideciek musi zostat nezmenene
         echo"<div id='toPDF'>";
         echo "<div style='float: left;'>AIS ID: <span id = 'aisId'>" . $_POST["ais_id"] . "</span><br>";
-        echo "Kód testu: " . $_SESSION["test"]["code"] . "<br><br>";
+        echo "<p>Kód testu: <span id = 'codeValue'>" . $_SESSION["test"]["code"] . "</span></p><br><br>";
         echo "<p hidden>testId: <span id = 'testId'>{$_SESSION["test"]["id"]}</span></p></div>";
 
         echo "<div style='height: 5em;'></div>";
