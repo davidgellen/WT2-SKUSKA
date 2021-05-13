@@ -152,8 +152,8 @@ if(isset($_POST)){
         switch ($question->type){
             case "short":
                 if(strtolower(removeAccents($studentAnswer)) == strtolower(removeAccents($question->correctAnswer))){
-                    $content["pointsRecieved"][$qid] = $question->points;
-                    $content["pointsRecieved"]["total"] = intval($content["pointsRecieved"]["total"]) + intval($content["pointsRecieved"][$qid]);
+                    $content["pointsRecieved"][$qid] = strval($question->points);
+                    $content["pointsRecieved"]["total"] = strval(doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]));
                 }
                 break;
             case "multi":
@@ -163,8 +163,8 @@ if(isset($_POST)){
                         $numOfCorrectAnswers++;
                     }
                 }
-                $content["pointsRecieved"][$qid] = floor(($question->points * ($numOfCorrectAnswers/count($question->correctAnswers)))*100)/100;
-                $content["pointsRecieved"]["total"] = doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]);
+                $content["pointsRecieved"][$qid] = strval(floor(($question->points * ($numOfCorrectAnswers/count($question->correctAnswers)))*100)/100);
+                $content["pointsRecieved"]["total"] = strval(doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]));
                 break;
             case "pair":
                 //eval
@@ -185,7 +185,7 @@ if(isset($_POST)){
                 }
 
                 $content["pointsRecieved"][$qid] = strval(round($points,2));
-                $content["pointsRecieved"]["total"] = doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]);
+                $content["pointsRecieved"]["total"] = strval(doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]));
                 
                 break;
         }

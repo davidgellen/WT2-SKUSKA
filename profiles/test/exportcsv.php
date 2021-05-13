@@ -11,7 +11,7 @@
     $stmt->execute([$_SESSION["test"]["id"]]);
     $vysledky = $stmt->fetchAll(PDO::FETCH_NUM);
     header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename=hodnotenia.csv');
+    header('Content-Disposition: attachment; filename='.$_SESSION["test"]["name"].'_hodnotenie.csv');
     function outputCSV($data) {
         $output = fopen("php://output", "wb");
         fputcsv($output, array('Ais ID', 'Krstné meno', 'Priezvisko', 'Celkové body'));

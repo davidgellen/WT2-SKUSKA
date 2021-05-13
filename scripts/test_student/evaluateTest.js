@@ -2,7 +2,7 @@ $("#evaluateQuestionsButton").click(function(){
     let totalPoints = 0;
     let allValues = {};
     $(".pointsInput").each(function(index){
-        totalPoints += parseInt($(this).val());
+        totalPoints += parseFloat($(this).val());
         allValues[$(this).data("qid").toString()] = $(this).val();
     })
 
