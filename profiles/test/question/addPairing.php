@@ -30,13 +30,13 @@
         <div style="margin: auto; max-width: 30em;">
             <div id="first" class="field_wrapper" style="float: left;">
                 <div>
-                    <input type="text" name="field_name1[]" value="" />
+                    <input type="text" name="field_name1[]" value="" required/>
                 </div>
             </div>
 
             <div id="second" class="field_wrapper">
                 <div>
-                    <input type="text" name="field_name2[]" value=""/>
+                    <input type="text" name="field_name2[]" value="" required/>
                 </div>
             </div>
         </div>
@@ -57,8 +57,8 @@
         var wrapper1 = $('#first'); //Input field wrapper
         var wrapper2 = $('#second'); //Input field wrapper
 
-        var fieldHTML1 = '<div><input type="text" name="field_name1[]" value=""></div>'; //New input field html
-        var fieldHTML2 = '<div><input type="text" name="field_name2[]" value=""></div>'; //New input field html
+        var fieldHTML1 = '<div><input type="text" name="field_name1[]" value="" required></div>'; //New input field html
+        var fieldHTML2 = '<div><input type="text" name="field_name2[]" value="" required></div>'; //New input field html
 
         var x = 1; //Initial field counter is 1
         

@@ -20,6 +20,7 @@ session_start();
 
         // tieto spany sa vyuzivaju v scripte,
         // mozes to preprobit na hocico len innerHTML tych span ideciek musi zostat nezmenene
+        echo"<div id='toPDF'>";
         echo "<div style='float: left;'>AIS ID: <span id = 'aisId'>" . $_POST["ais_id"] . "</span><br>";
         echo "Kód testu: " . $_SESSION["test"]["code"] . "<br><br>";
         echo "<p hidden>testId: <span id = 'testId'>{$_SESSION["test"]["id"]}</span></p></div>";
@@ -106,13 +107,26 @@ session_start();
             echo "</div>";
         }
         echo "<p>Spolu bodov: <span id = 'pointTotal'>" . $pointsRecieved->total ."</span></p><br>";
+        echo "</div>";
 
     ?>
 
     <button id = "evaluateQuestionsButton" class="btn1">Hodnotiť</button>
+    <button onclick="toPdf();">Export do PDF</button>
 
     <script>
-
+    function toPdf() {
+	var element = document.getElementById('toPDF');
+    var opt = {
+        margin:       1,
+        filename:     '<?php echo "TestID-".$_SESSION["test"]["id"]."_"."StudentAisID-".$_POST["ais_id"];?>.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    var worker = html2pdf().set(opt).from(element).save();   
+    }
+    
     $( document ).ready(function() {
     $('.renderedEq').each(function(index) {
         fetch('../../testStudentsJSON/test'+ $('#testId').html() +'/'+ $('#aisId').html() +'.json')
@@ -156,11 +170,14 @@ session_start();
             }
         })
     });
+
     
     </script>
 
 
 <?php include "../../includes/mathQuestion/insertMathPaths.php";?>
 <script src = "../../scripts/test_student/evaluateTest.js"></script>
+<script src="html2pdf.js-master/dist/html2pdf.bundle.min.js"></script></body>
+
 </body>
 </html>
