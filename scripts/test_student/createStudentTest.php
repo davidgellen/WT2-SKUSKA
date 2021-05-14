@@ -158,12 +158,20 @@ if(isset($_POST)){
                 break;
             case "multi":
                 $numOfCorrectAnswers = 0;
+                $numOfWrongAnswers = 0;
                 for($i = 0; $i<count($question->correctAnswers); $i++){
                     if(in_array($question->correctAnswers[$i], $studentAnswer)){
                         $numOfCorrectAnswers++;
                     }
                 }
-                $content["pointsRecieved"][$qid] = strval(floor(($question->points * ($numOfCorrectAnswers/count($question->correctAnswers)))*100)/100);
+                for($i = 0; $i<count($question->wrongAnswers); $i++){
+                    if(in_array($question->wrongAnswers[$i], $studentAnswer)){
+                        $numOfWrongAnswers++;
+                    }
+                }
+                $numOfAnswers = $numOfCorrectAnswers - $numOfWrongAnswers;
+                if($numOfAnswers < 0)   $numOfAnswers = 0;
+                $content["pointsRecieved"][$qid] = strval(floor(($question->points * ($numOfAnswers/count($question->correctAnswers)))*100)/100);
                 $content["pointsRecieved"]["total"] = strval(doubleval($content["pointsRecieved"]["total"]) + doubleval($content["pointsRecieved"][$qid]));
                 break;
             case "pair":
