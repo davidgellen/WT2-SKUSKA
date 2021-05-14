@@ -39,13 +39,15 @@ pozadie- https://www.svgbackgrounds.com/#rainbow-vortex by
         </nav>
     </header>
     <article>
-        <a href="https://i.pinimg.com/originals/b1/b7/de/b1b7de37299d6d589ba3d7e28652869b.png">Ikona</a>
-        <a href="http://mathlive.io/">Matematika</a>
-        <a href="https://github.com/endroid/qr-code">QR Sken na obrázok</a>
-        <a href="https://ekoopmans.github.io/html2pdf.js/">Export to pdf</a>
-        <a href="https://jqueryui.com/sortable/">Párovanie</a>
-        <a href="https://codepen.io/BananaCoding/pen/mdrGjpL">Kresba</a>
-        <a href="https://getbootstrap.com/">Bootstrap</a>
+        <ul style="list-style: none;">
+        <li><a href="https://i.pinimg.com/originals/b1/b7/de/b1b7de37299d6d589ba3d7e28652869b.png">Ikona</a></li>
+        <li><a href="https://github.com/camdenreslink/equation-editor">Matematika</a></li>
+        <li><a href="https://github.com/endroid/qr-code">QR Sken na obrázok</a></li>
+        <li><a href="https://ekoopmans.github.io/html2pdf.js/">Export to pdf</a></li>
+        <li><a href="https://jqueryui.com/sortable/">Párovanie</a></li>
+        <li><a href="https://codepen.io/BananaCoding/pen/mdrGjpL">Kresba</a></li>
+        <li><a href="https://getbootstrap.com/">Bootstrap</a></li>
+        </ul>
     </article>
 </div>
 <?php include "../includes/footer.php";?>
