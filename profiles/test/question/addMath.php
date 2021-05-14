@@ -526,7 +526,6 @@ if(isset($_SESSION['logged_as'])){
     JSON:
     <div id="ContentJSON" class="toJsonMath">&nbsp</div> -->
     <script>
-        // toto len jebnut do odpovede v teste a je otazka spravena
         $('#toJSON').on('click', function() {
             var jsonObj = $('.eqEdEquation').data('eqObject').buildJsonObj();
             $('#ContentJSON').html(JSON.stringify(jsonObj));

@@ -273,7 +273,7 @@ if ($_SESSION['start_time'] + $testDuration*60 < time()){
                         equation.updateAll();
                     }
                     catch(error){ 
-                        console.log(error); // ani tu byt nemusi len to robi bordel vsade
+                        console.log(error); 
                     }
                 })
         });
