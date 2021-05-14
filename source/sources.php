@@ -52,7 +52,7 @@ pozadie- https://www.svgbackgrounds.com/#rainbow-vortex by
                     <li>testTemplatesJSON - súbory pre otázky, ktoré vytvoril učiteľ</li>
                 </ul>
             </li>
-            <li><strong>Nefunkčné požiadavky: docker, prehľad ci niekto opustil tab</strong>
+            <li><strong>Nefunkčné požiadavky</strong>
                 <ul>
                     <li>Docker</li>
                     <li>Prehľad či niekto opustil tab</li>
