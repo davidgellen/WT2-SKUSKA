@@ -15,6 +15,8 @@ $(document).ready(function () {
         var points = $("#points").val();
         var questionText = $("#questionText").val();
 
+        if($(".correct").length >0){
+
         for(var i = 0; i<$(".correct").length; i++){
             correctData.push($(".correct")[i].value);
         }
@@ -44,6 +46,8 @@ $(document).ready(function () {
                 window.location.href = redirect;
             }
         })
+    }
     });
+
     
     })
