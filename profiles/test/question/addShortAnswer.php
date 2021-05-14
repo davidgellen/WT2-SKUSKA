@@ -38,6 +38,6 @@
 
     <br>
 
-    <button onclick="location.href = '../detail.php?test=<?php echo $_SESSION['test']['code']; ?>';"class="btnActivation">Späť</button><br>
+    <button onclick="location.href = '../detail.php?test=<?php echo $_SESSION['test']['code']; ?>';" class="btnActivation">Späť</button><br>
 </body>
 </html>

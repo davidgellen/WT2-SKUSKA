@@ -139,7 +139,7 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
                 <form action="index.php" method="post">
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Zadaj email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Zadaj email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
