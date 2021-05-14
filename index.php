@@ -93,7 +93,7 @@ else if(isset($_POST['email']) && isset($_POST['password'])){
                         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="source/sources.php">Zdroje</a>
+                        <a class="nav-link" href="source/sources.php">Dokumentácia</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about/goals.php">Ciele</a>
